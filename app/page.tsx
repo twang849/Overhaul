@@ -160,8 +160,10 @@ const useTTS = () => {
                 className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 py-6 text-lg"
                 onMouseEnter={() => handleMouseEnter("Download SmartCart")}
                 onMouseLeave={handleMouseLeave}
+                aria-label="Download SmartCart Application"
               >
                 Download
+                <span className="sr-only"> SmartCart Application</span>
               </Button>
               <Link href="/checkout" className="inline-block mt-4">
                 <Button 

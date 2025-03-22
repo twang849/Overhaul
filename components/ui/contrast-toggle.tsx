@@ -8,7 +8,6 @@ export function ContrastToggle() {
   const [highContrast, setHighContrast] = useState(false)
 
   useEffect(() => {
-    // Check if user has previously set contrast preference
     const savedContrast = localStorage.getItem("highContrast")
     if (savedContrast) {
       setHighContrast(JSON.parse(savedContrast))
@@ -36,9 +35,12 @@ export function ContrastToggle() {
       size="icon"
       onClick={toggleContrast}
       aria-label={highContrast ? "Disable high contrast" : "Enable high contrast"}
-      className="contrast-toggle-button"
+      className="contrast-toggle-button relative"
     >
       {highContrast ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+      <span className="sr-only">
+        {highContrast ? "Disable high contrast mode" : "Enable high contrast mode"}
+      </span>
     </Button>
   )
 }
