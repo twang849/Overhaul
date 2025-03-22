@@ -1,4 +1,5 @@
 "use client"
+import { Switch } from "@/components/ui/switch";
 import Image from "next/image"
 import { Bot } from "lucide-react"
 import FontSizeButton from "../../components/ui/font-size-button"
@@ -89,7 +90,7 @@ export default function Checkout() {
           <div className="absolute top-4 left-8 bg-white/20 px-4 py-1 rounded-full text-white">Scanner</div>
           <div className="h-[500px] w-full relative rounded-lg overflow-hidden">
             <Image
-              src="/placeholder.svg?height=500&width=400"
+              src="/bananas.png?height=500&width=400"
               alt="Banana bundle scan"
               width={400}
               height={500}
@@ -98,8 +99,8 @@ export default function Checkout() {
           </div>
         </div>
         <div className="p-8">
-          <FontSizeButton/>
           <ContrastToggle/>
+          <FontSizeButton/>
           <h1 className="enlargeable text-4xl font-bold mb-8">Checkout</h1>
           <div className="space-y-4">
             <div className="flex justify-between border-b pb-4">

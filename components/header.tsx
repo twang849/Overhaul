@@ -8,7 +8,7 @@ import { useState, useCallback, useRef, useEffect } from "react";
 
 export default function Header() {
   const useTTS = () => {
-    const [isTTSEnabled, setIsTTSEnabled] = useState(false)
+    const [isTTSEnabled, setIsTTSEnabled] = useState(true)
     const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
   
     // Initialize speech synthesis
@@ -78,7 +78,10 @@ export default function Header() {
   return (
     <header className="bg-[#c8c2f0] py-3 px-6 flex items-center justify-between">
       <div className="flex items-center">
-        <Link href="/" className="text-2xl font-bold flex items-center whitespace-nowrap">
+        <Link
+          onMouseEnter={() => handleMouseEnter("Smartcart!")}
+          onMouseLeave={handleMouseLeave}
+          href="/" className="text-2xl font-bold flex items-center whitespace-nowrap">
           SMARTCART <ShoppingCart className="ml-2 h-6 w-6" />
         </Link>
       </div>
