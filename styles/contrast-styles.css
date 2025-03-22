@@ -410,25 +410,41 @@ html.high-contrast .bg-\[\#5c5a7c\]:hover {
   border: none !important;
 }
 
-/* Fix overlapping controls */
-:root.high-contrast .absolute.top-4.right-4 {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  width: auto;
-  z-index: 50;
+:root.high-contrast [role="switch"][aria-label="Toggle text-to-speech"] {
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  outline: 2px solid #ffffff !important;
+  outline-offset: 2px !important;
 }
 
-:root.high-contrast .absolute.top-4.right-4 > * {
-  position: relative;
-  top: auto;
-  right: auto;
+:root.high-contrast [role="switch"][aria-label="Toggle text-to-speech"][data-state="checked"] {
+  background-color: #ffff00 !important;
+  outline: 2px solid #ffffff !important;
+  outline-offset: 2px !important;
 }
 
-:root.high-contrast .flex.items-center.space-x-4 {
-  position: relative;
-  top: auto;
-  right: auto;
-  margin-left: auto;
+:root.high-contrast [role="switch"][aria-label="Toggle text-to-speech"] span {
+  background-color: #ffffff !important;
 }
 
+:root.high-contrast .text-sm.text-white {
+  color: #ffffff !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+:root.high-contrast .bg-white\/10.backdrop-blur-sm {
+  border: 2px solid #ffffff !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.high-contrast label.enlargeable {
+  color: #ffffff !important;
+}
+
+:root.high-contrast .bg-white\/10.backdrop-blur-sm label {
+  color: #ffffff !important;
+}
+
+:root.high-contrast [for="fontSizeSlider"] {
+  color: #ffffff !important;
+}
