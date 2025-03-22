@@ -1,0 +1,47 @@
+<!-- counter.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Counter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+    button {
+      background-color: green;
+      color: white;
+      padding: 20px 40px; /* Increase button size */
+      border: none;
+      cursor: pointer;
+      margin: 15px 0; /* Add margin to space buttons */
+      font-size: 18px; /* Make text larger */
+      width: 100%; /* Make button take full width */
+      max-width: 300px; /* Limit button size for large screens */
+      display: block; /* Make buttons block elements to be on new lines */
+      margin-left: auto;
+      margin-right: auto;
+    }
+    button:hover {
+      background-color: darkgreen;
+    }
+  </style>
+</head>
+<body>
+  <h2>Select a Counter</h2>
+  <button onclick="selectCounter(1)">Counter 1</button>
+  <button onclick="selectCounter(2)">Counter 2</button>
+  <button onclick="selectCounter(3)">Counter 3</button>
+  <button onclick="selectCounter(4)">Counter 4</button>
+
+  <script>
+    function selectCounter(counter) {
+      alert(`Counter ${counter} is waiting for you!`);
+      window.close(); // Close the popup window
+    }
+  </script>
+</body>
+</html>
