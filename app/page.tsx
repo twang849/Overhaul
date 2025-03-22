@@ -10,7 +10,9 @@ import { ContrastToggle } from "@/components/ui/contrast-toggle";
 import "@/styles/contrast-styles.css";
 import FontSizeSlider from "@/components/ui/font-size-button";
 
-// Custom hook for TTS functionality
+
+export default function Home() {
+  // Custom hook for TTS functionality
 const useTTS = () => {
   const [isTTSEnabled, setIsTTSEnabled] = useState(false)
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
@@ -66,18 +68,6 @@ const useTTS = () => {
     stopSpeaking
   }
 }
-
-export default function Home() {
-  // Ensure contrast mode persists across page reloads
-  useEffect(() => {
-    const savedContrast = localStorage.getItem("highContrast");
-    if (savedContrast === "true") {
-      document.documentElement.classList.add("high-contrast");
-    } else {
-      document.documentElement.classList.remove("high-contrast");
-    }
-  }, []);
-
   // Initialize TTS hook
   const { isTTSEnabled, setIsTTSEnabled, speak, stopSpeaking } = useTTS()
 
@@ -90,24 +80,115 @@ export default function Home() {
     stopSpeaking()
   }, [stopSpeaking])
 
+  useEffect(() => {
+    // Create a script element
+    const script = document.createElement('script');
+    script.src = './magnifier.js'; // Adjust the path as needed
+    script.async = true;
+    document.body.appendChild(script);
+  
+    const savedContrast = localStorage.getItem("highContrast");
+    if (savedContrast === "true") {
+      document.documentElement.classList.add("high-contrast");
+    }
+  
+    return () => {
+      // Cleanup the script when the component unmounts
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen">
+      <header className="bg-[#c8c2f0] py-3 px-6 flex items-center justify-between">
+      <div className="flex items-center">
+        <Link href="/" className="text-2xl font-bold flex items-center whitespace-nowrap">
+          SMARTCART <ShoppingCart className="ml-2 h-6 w-6" />
+        </Link>
+      </div>
+
+      <nav className="hidden md:flex items-center gap-8">
+        <Link 
+          onMouseEnter={() => handleMouseEnter("Home")}
+          onMouseLeave={handleMouseLeave}
+          href="/" className="enlargeable text-black hover:text-gray-700 whitespace-nowrap px-2"
+        >
+          Home
+        </Link>
+        <Link 
+          onMouseEnter={() => handleMouseEnter("Artificial Intelligence")}
+          onMouseLeave={handleMouseLeave}
+          href="/ai" className="enlargeable text-black hover:text-gray-700 whitespace-nowrap px-2"
+        >
+          AI
+        </Link>
+        <Link 
+          onMouseEnter={() => handleMouseEnter("About Us")}
+          onMouseLeave={handleMouseLeave}
+          href="/about" className="enlargeable text-black hover:text-gray-700 whitespace-nowrap px-2"
+        >
+          About Us
+        </Link>
+        <Link 
+          onMouseEnter={() => handleMouseEnter("Mission")}
+          onMouseLeave={handleMouseLeave}
+          href="/mission" className="enlargeable text-black hover:text-gray-700 whitespace-nowrap px-2"
+        >
+          Mission
+        </Link>
+        <Link 
+          onMouseEnter={() => handleMouseEnter("Help")}
+          onMouseLeave={handleMouseLeave}
+          href="/help" className="enlargeable text-black hover:text-gray-700 whitespace-nowrap px-2"
+        >
+          Help
+        </Link>
+        <Link 
+          onMouseEnter={() => handleMouseEnter("Checkout")}
+          onMouseLeave={handleMouseLeave}
+          href="/checkout" className="enlargeable text-black hover:text-gray-700 whitespace-nowrap px-2"
+        >
+          Checkout
+        </Link>
+      </nav>
+
+      <div className="flex items-center gap-6">
+        <Link href="/login" className="enlargeable text-black hover:text-gray-700 whitespace-nowrap px-2">
+          Log In
+        </Link>
+        <Button className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] whitespace-nowrap px-4">
+          SIGN UP
+        </Button>
+      </div>
+    </header>
       <section className="relative overflow-hidden bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c]">
         <div className="absolute top-4 right-4 z-50">
-          <ContrastToggle />
         </div>
         <div className="container mx-auto px-4 py-16 md:py-24">
           {/* Accessibility Controls */}
           <div className="absolute top-4 right-4 flex items-center space-x-4">
-            {/* <FontSizeButton /> */}
-            <FontSizeSlider/>
-            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+          <div 
+            onMouseEnter={() => handleMouseEnter("Toggle High Contrast Mode")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <ContrastToggle />
+          </div>
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2"
+              onMouseEnter={() => handleMouseEnter("Toggle Text-to-Speech")}
+              onMouseLeave={handleMouseLeave}
+            >
               <span className="enlargeable text-sm text-white">Text-to-Speech</span>
               <Switch
                 checked={isTTSEnabled}
                 onCheckedChange={() => setIsTTSEnabled(!isTTSEnabled)}
                 aria-label="Toggle text-to-speech"
               />
+            </div>
+            <div 
+              onMouseEnter={() => handleMouseEnter("Adjust Font Size")}
+              onMouseLeave={handleMouseLeave}
+            >
+              <FontSizeSlider />  
             </div>
           </div>
 
@@ -189,7 +270,7 @@ export default function Home() {
                       </div>
                       <div className="flex-1 relative rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:-translate-y-1 group">
                         <Image
-                          src="/20175355001_front_a06_@2.png"
+                          src="./bananas.png"
                           alt="Fresh yellow bananas bundled together, perfect for a healthy snack or smoothie. Each banana is uniformly ripe with a bright yellow peel."
                           title="Fresh yellow bananas bundled together, perfect for a healthy snack or smoothie"
                           width={300}

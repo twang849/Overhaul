@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { handleMouseEnter, handleMouseLeave} from "@/app/page"
 
 export default function Header() {
   return (
