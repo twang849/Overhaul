@@ -11,7 +11,75 @@ import "@/styles/contrast-styles.css";
 import FontSizeSlider from "@/components/ui/font-size-button";
 import { MagnifierToggle } from "@/components/ui/magnifier-toggle";
 
+const welcomeStyles = `
+  @keyframes fadeInScale {
+    0% { 
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    100% { 
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeOutScale {
+    0% { 
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% { 
+      opacity: 0;
+      transform: scale(1.1);
+    }
+  }
+
+  .welcome-enter {
+    animation: fadeInScale 1s ease-out forwards;
+  }
+
+  .welcome-exit {
+    animation: fadeOutScale 1s ease-in forwards;
+  }
+`;
+
+const slideOutKeyframes = `
+  @keyframes slideOut {
+    0% { transform: translateY(0); opacity: 1; }
+    80% { transform: translateY(-100%); opacity: 1; }
+    100% { transform: translateY(-100%); opacity: 0; display: none; }
+  }
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+`;
+
 export default function Home() {
+
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [isExiting, setIsExiting] = useState(false);
+
+  useEffect(() => {
+    // Add the animation styles
+    const style = document.createElement('style');
+    style.innerHTML = welcomeStyles;
+    document.head.appendChild(style);
+
+    // Start exit animation after 2 seconds
+    const exitTimer = setTimeout(() => {
+      setIsExiting(true);
+      // Remove component after exit animation completes
+      setTimeout(() => {
+        setShowWelcome(false);
+      }, 1000);
+    }, 2000);
+
+    return () => {
+      document.head.removeChild(style);
+      clearTimeout(exitTimer);
+    };
+  }, []);
 
   const openPopup = useCallback(() => {
     const popup = window.open(
@@ -93,6 +161,17 @@ const useTTS = () => {
   }, [stopSpeaking])
 
   useEffect(() => {
+    // Add animation styles to head
+    const styleSheet = document.createElement("style");
+    styleSheet.innerText = slideOutKeyframes;
+    document.head.appendChild(styleSheet);
+
+    return () => {
+      document.head.removeChild(styleSheet);
+    };
+  }, []);
+
+  useEffect(() => {
     // Create a script element
     const script = document.createElement('script');
     script.src = './magnifier.js'; // Adjust the path as needed
@@ -163,14 +242,21 @@ const useTTS = () => {
 
   return (
     <div className="min-h-screen">
+      {showWelcome && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c] z-[9999]">
+          <div className={`text-5xl font-bold text-white ${isExiting ? 'welcome-exit' : 'welcome-enter'}`}>
+            Welcome to SMARTCART 🛒
+          </div>
+        </div>
+      )}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c]">
         <div className="absolute top-4 right-4 z-50">
         </div>
         <div className="container mx-auto px-4 py-16 md:py-24">
           {/* Accessibility Controls */}
-          <div className="absolute top-4 right-4 flex items-center space-x-4">
+          <div className={`absolute top-4 right-4 flex items-center space-x-4 transition-opacity duration-500 ${showWelcome ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
             <div 
-              className="flex items-center space-x-2" // Added flex container
+              className="flex items-center space-x-2"
               onMouseEnter={() => handleMouseEnter("Toggle High Contrast Mode")}
               onMouseLeave={handleMouseLeave}
             >
@@ -295,9 +381,6 @@ const useTTS = () => {
                           onMouseEnter={() => speak("Yellow bananas bundled together. Each banana is uniformly ripe with a bright yellow peel.")}
                           onMouseLeave={stopSpeaking}
                         />
-                        <div className="absolute bottom-2 right-2 bg-black/60 text-white px-3 py-1.5 rounded-full text-sm backdrop-blur-sm">
-                          scanning...
-                        </div>
                         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute inset-0 bg-black/75 flex items-center justify-center p-4 rounded-lg">
                           <p className="enlargeable text-white text-center text-sm">
                             Yellow bananas bundled together. Each banana is uniformly ripe with a bright yellow peel.
