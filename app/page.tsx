@@ -1,10 +1,10 @@
 "use client"
-import { useEffect } from "react";
 import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useState, useCallback } from "react";
+import "@/styles/magnifier.css"; 
+import { useState, useCallback, useRef, useEffect } from "react";
 import { Switch } from "@/components/ui/switch";
 import { ContrastToggle } from "@/components/ui/contrast-toggle";
 import "@/styles/contrast-styles.css";
@@ -13,6 +13,7 @@ import FontSizeSlider from "@/components/ui/font-size-button";
 // Custom hook for TTS functionality
 const useTTS = () => {
   const [isTTSEnabled, setIsTTSEnabled] = useState(false)
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
 
   // Initialize speech synthesis
   const speak = useCallback((text: string) => {
@@ -25,13 +26,16 @@ const useTTS = () => {
     }
 
     // Cancel any ongoing speech
-    window.speechSynthesis.cancel()
+    stopSpeaking()
 
     // Create and configure utterance
     const utterance = new SpeechSynthesisUtterance(text)
     utterance.rate = 1.0
     utterance.pitch = 1.0
     utterance.volume = 1.0
+
+    // Store reference to current utterance
+    utteranceRef.current = utterance
 
     // Speak the text
     window.speechSynthesis.speak(utterance)
@@ -41,8 +45,19 @@ const useTTS = () => {
   const stopSpeaking = useCallback(() => {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel()
+      utteranceRef.current = null
     }
   }, [])
+
+  // Cleanup function to stop speech when component unmounts
+  // or when TTS is disabled
+  useEffect(() => {
+    return () => {
+      if (!isTTSEnabled) {
+        stopSpeaking()
+      }
+    }
+  }, [isTTSEnabled, stopSpeaking])
 
   return {
     isTTSEnabled,
@@ -64,6 +79,15 @@ export default function Home() {
   // Initialize TTS hook
   const { isTTSEnabled, setIsTTSEnabled, speak, stopSpeaking } = useTTS()
 
+  // Memoized hover handlers for better performance
+  const handleMouseEnter = useCallback((text: string) => {
+    speak(text)
+  }, [speak])
+
+  const handleMouseLeave = useCallback(() => {
+    stopSpeaking()
+  }, [stopSpeaking])
+
   return (
     <div className="min-h-screen">
       <section className="relative overflow-hidden bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c]">
@@ -76,10 +100,10 @@ export default function Home() {
             {/* <FontSizeButton /> */}
             <FontSizeSlider/>
             <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
-              <span className="text-sm text-white">Text-to-Speech</span>
+              <span className="enlargeable text-sm text-white">Text-to-Speech</span>
               <Switch
                 checked={isTTSEnabled}
-                onCheckedChange={setIsTTSEnabled}
+                onCheckedChange={() => setIsTTSEnabled(!isTTSEnabled)}
                 aria-label="Toggle text-to-speech"
               />
             </div>
@@ -89,30 +113,30 @@ export default function Home() {
             <div className="space-y-6">
               <h1 
                 className="enlargeable text-6xl font-bold tracking-tight"
-                onMouseEnter={() => speak("SmartCart")}
-                onMouseLeave={stopSpeaking}
+                onMouseEnter={() => handleMouseEnter("SmartCart")}
+                onMouseLeave={handleMouseLeave}
               >
                 SmartCart
               </h1>
               <h2 
                 className="enlargeable text-3xl font-medium"
-                onMouseEnter={() => speak("Shop Smarter, Checkout Faster!")}
-                onMouseLeave={stopSpeaking}
+                onMouseEnter={() => handleMouseEnter("Shop Smarter, Checkout Faster!")}
+                onMouseLeave={handleMouseLeave}
               >
                 Shop Smarter, Checkout Faster!
               </h2>
               <p 
                 className="enlargeable text-lg max-w-md"
-                onMouseEnter={() => speak("SmartCart revolutionizes grocery shopping with AI-powered, accessible, and seamless checkout solutions — making every trip faster, easier, and smarter for all.")}
-                onMouseLeave={stopSpeaking}
+                onMouseEnter={() => handleMouseEnter("SmartCart revolutionizes grocery shopping with AI-powered, accessible, and seamless checkout solutions — making every trip faster, easier, and smarter for all.")}
+                onMouseLeave={handleMouseLeave}
               >
                 SmartCart revolutionizes grocery shopping with AI-powered, accessible, and seamless checkout solutions —
                 making every trip faster, easier, and smarter for all.
               </p>
-              <Button 
+              <Button id="magnify"
                 className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 py-6 text-lg"
-                onMouseEnter={() => speak("Download SmartCart")}
-                onMouseLeave={stopSpeaking}
+                onMouseEnter={() => handleMouseEnter("Download SmartCart")}
+                onMouseLeave={handleMouseLeave}
               >
                 Download
               </Button>
@@ -120,8 +144,8 @@ export default function Home() {
                 <Button 
                   variant="outline" 
                   className="enlargeable border-[#5c5a7c] text-[#5c5a7c]"
-                  onMouseEnter={() => speak("Go to Checkout")}
-                  onMouseLeave={stopSpeaking}
+                  onMouseEnter={() => handleMouseEnter("Go to Checkout")}
+                  onMouseLeave={handleMouseLeave}
                 >
                   Go to Checkout
                 </Button>
@@ -144,8 +168,8 @@ export default function Home() {
                   </div>
                   <div className="aspect-[9/19] overflow-hidden bg-gradient-to-b from-gray-50 to-white phone-bg">
                     <div className="p-4 flex flex-col h-full">
-                    <div 
-                        className="enlargeable bg-[#c8c2f0] rounded-lg p-2 mb-2 text-center view-cart-button"
+                      <div 
+                        className="enlargeable bg-gradient-to-r from-[#c8c2f0] to-[#a599e9] rounded-lg p-3 mb-3 text-center text-white shadow-md transition-transform hover:scale-[1.02]"
                         onMouseEnter={() => speak("View Cart")}
                         onMouseLeave={stopSpeaking}
                       >
@@ -153,8 +177,8 @@ export default function Home() {
                       </div>
                       <div 
                         className="enlargeable flex items-center mb-3 bg-white/80 backdrop-blur-sm rounded-lg p-2 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md hover:bg-white/90 cursor-pointer"
-                        onMouseEnter={() => speak("Banana Bundle - Large Detected")}
-                        onMouseLeave={stopSpeaking}
+                        onMouseEnter={() => handleMouseEnter("Banana Bundle - Large Detected")}
+                        onMouseLeave={handleMouseLeave}
                       >
                         <div className="flex-1 text-gray-800 font-medium">Banana Bundle - Large Detected</div>
                         <div className="h-6 w-6 bg-gradient-to-br from-[#e0f7e0] to-[#c8ecc8] rounded-full flex items-center justify-center shadow-sm transition-transform duration-300 hover:scale-110">
@@ -168,7 +192,7 @@ export default function Home() {
                           title="Fresh yellow bananas bundled together, perfect for a healthy snack or smoothie"
                           width={300}
                           height={400}
-                          className="object-cover rounded-lg transform transition-transform duration-300 hover:brightness-105"
+                          className="enlargeable object-cover rounded-lg transform transition-transform duration-300 hover:brightness-105"
                           onMouseEnter={() => speak("Yellow bananas bundled together. Each banana is uniformly ripe with a bright yellow peel.")}
                           onMouseLeave={stopSpeaking}
                         />

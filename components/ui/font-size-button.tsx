@@ -3,14 +3,18 @@
 import { useState, useEffect } from 'react';
 
 export default function FontSizeSlider() {
-  const [fontSize, setFontSize] = useState<number>(() => {
-    // Retrieve the font size from local storage or use the default value
-    const savedFontSize = localStorage.getItem('fontSize');
-    return savedFontSize ? parseFloat(savedFontSize) : 16;
-  });
+  const [fontSize, setFontSize] = useState<number>(16); // Default value
 
   useEffect(() => {
-    // Apply the font size to all enlargeable elements when the component mounts
+    // Retrieve the font size from local storage after the component mounts
+    const savedFontSize = localStorage.getItem('fontSize');
+    if (savedFontSize) {
+      setFontSize(parseFloat(savedFontSize));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Apply the font size to all enlargeable elements when the font size changes
     const enlargeables: NodeList = document.querySelectorAll(".enlargeable");
     enlargeables.forEach((element) => {
       const el = element as HTMLElement;
@@ -25,20 +29,11 @@ export default function FontSizeSlider() {
 
     // Save the new font size to local storage
     localStorage.setItem('fontSize', newFontSize.toString());
-
-    const enlargeables: NodeList = document.querySelectorAll(".enlargeable");
-    enlargeables.forEach((element) => {
-      const el = element as HTMLElement;
-      el.style.fontSize = `${newFontSize}px`;
-
-      // Adjust line height proportionally
-      el.style.lineHeight = `${newFontSize * 1.5}px`;
-    });
   }
 
   return (
     <div style={{ marginTop: '10px', marginBottom: '10px' }}>
-      <label htmlFor="fontSizeSlider">Adjust Font Size:</label>
+      <label className='enlargeable' htmlFor="fontSizeSlider">Adjust Font Size:</label>
       <input
         id="fontSizeSlider"
         type="range"
@@ -48,7 +43,7 @@ export default function FontSizeSlider() {
         onChange={handleSliderChange}
         style={{ marginLeft: '10px' }}
       />
-      <span style={{ marginLeft: '10px' }}>{fontSize}px</span>
+      {/* <span className='enlargeable' style={{ marginLeft: '10px' }}>{fontSize}px</span> */}
     </div>
   );
 }
