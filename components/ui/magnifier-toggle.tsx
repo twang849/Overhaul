@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "./button"
 import { Search, X } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -34,7 +36,7 @@ export function MagnifierToggle() {
       variant="outline"
       size="lg"
       onClick={toggleMagnifier}
-      className="magnifier-toggle-button"
+      className="magnifier-toggle-button h-8 px-2 text-xs flex items-center gap-1 bg-yellow-400 border-yellow-500 hover:bg-yellow-500 text-black"
     >
       <div style={{fontSize: '16px'}}>Magnifying<br/>Glass</div>
       {/* Correct the icon rendering */}
@@ -42,4 +44,3 @@ export function MagnifierToggle() {
     </Button>
   )
 }
-

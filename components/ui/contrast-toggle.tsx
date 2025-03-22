@@ -35,7 +35,7 @@ export function ContrastToggle() {
       // size="lg"
       onClick={toggleContrast}
       aria-label={highContrast ? "Disable high contrast" : "Enable high contrast"}
-      className="contrast-toggle-button relative"
+      className="contrast-toggle-button relative flex items-center gap-2"
     >
       <div style={{fontSize: '16px'}}>
         High Contrast 

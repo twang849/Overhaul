@@ -11,19 +11,20 @@ import "@/styles/contrast-styles.css";
 import FontSizeSlider from "@/components/ui/font-size-button";
 import { MagnifierToggle } from "@/components/ui/magnifier-toggle";
 
-interface CustomWindow extends Window {
-  SpeechRecognition: any;
-  webkitSpeechRecognition: any;
-  SpeechGrammarList: any;
-  webkitSpeechGrammarList: any;
-  SpeechRecognitionEvent: any;
-  webkitSpeechRecognitionEvent: any;
-}
-
-declare let window: CustomWindow;
-
 export default function Home() {
-  // Custom hook for TTS functionality
+
+  const openPopup = useCallback(() => {
+    const popup = window.open(
+      '/for-kids.html', 
+      'for-kids', 
+      'width=600,height=400,scrollbars=yes,resizable=yes'
+    );
+  
+    if (!popup) {
+      console.error('Popup blocked by the browser');
+    }
+  }, []);
+    
 const useTTS = () => {
   const [isTTSEnabled, setIsTTSEnabled] = useState(false)
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
@@ -94,7 +95,7 @@ const useTTS = () => {
   useEffect(() => {
     // Create a script element
     const script = document.createElement('script');
-    script.src = 'magnifier.js'; // Adjust the path as needed
+    script.src = './magnifier.js'; // Adjust the path as needed
     script.async = true;
     document.body.appendChild(script);
   
@@ -168,24 +169,19 @@ const useTTS = () => {
         <div className="container mx-auto px-4 py-16 md:py-24">
           {/* Accessibility Controls */}
           <div className="absolute top-4 right-4 flex items-center space-x-4">
-          <div 
-            onMouseEnter={() => handleMouseEnter("Toggle High Contrast Mode")}
-            onMouseLeave={handleMouseLeave}
-          >
-            <ContrastToggle />
-          </div>
             <div 
-              onMouseEnter={() => handleMouseEnter("Magnifying Mode")}
+              className="flex items-center space-x-2" // Added flex container
+              onMouseEnter={() => handleMouseEnter("Toggle High Contrast Mode")}
               onMouseLeave={handleMouseLeave}
             >
-              <MagnifierToggle/>
+              <ContrastToggle />
+              <MagnifierToggle />
             </div>
-          
             <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2"
               onMouseEnter={() => handleMouseEnter("Toggle Text-to-Speech")}
               onMouseLeave={handleMouseLeave}
             >
-              <span className="enlargeable text-sm text-black">Text-to-Speech</span>
+              <span className="enlargeable text-sm text-white">Text-to-Speech</span>
               <Switch
                 checked={isTTSEnabled}
                 onCheckedChange={() => setIsTTSEnabled(!isTTSEnabled)}
@@ -229,10 +225,8 @@ const useTTS = () => {
                 className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 py-6 text-lg"
                 onMouseEnter={() => handleMouseEnter("Download SmartCart")}
                 onMouseLeave={handleMouseLeave}
-                aria-label="Download SmartCart Application"
               >
                 Download
-                <span className="sr-only"> SmartCart Application</span>
               </Button>
               <Link href="/checkout" className="inline-block mt-4">
                 <Button 
@@ -244,8 +238,19 @@ const useTTS = () => {
                   Go to Checkout
                 </Button>
               </Link>
-            </div>
 
+              <Button
+      className="enlargeable bg-gradient-to-r from-yellow-400 to-red-500 text-white px-12 py-4 text-xl rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"
+      onMouseEnter={() => speak("Let's Play with Me!")}
+      onMouseLeave={stopSpeaking}
+      onClick={openPopup}
+      aria-label="Play with Me Button"
+    >
+      Play with Me!
+    </Button>
+
+
+            </div>
             <div className="relative">
               <div className="relative mx-auto max-w-[300px]">
                 <div className="relative z-10 overflow-hidden rounded-[40px] border-[12px] border-black bg-black shadow-2xl ring-1 ring-gray-900/10">
@@ -281,7 +286,7 @@ const useTTS = () => {
                       </div>
                       <div className="flex-1 relative rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:-translate-y-1 group">
                         <Image
-                          src="/bananas.png"
+                          src="./bananas.png"
                           alt="Fresh yellow bananas bundled together, perfect for a healthy snack or smoothie. Each banana is uniformly ripe with a bright yellow peel."
                           title="Fresh yellow bananas bundled together, perfect for a healthy snack or smoothie"
                           width={300}
@@ -300,7 +305,7 @@ const useTTS = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div>                 
                   <div className="absolute bottom-1 inset-x-0 flex justify-center">
                     <div className="h-1 w-16 bg-gray-800 rounded-full"></div>
                   </div>
@@ -312,7 +317,7 @@ const useTTS = () => {
             </div>
 
           </div>
-        </div>
+        </div>     
       </section>
     </div>
   );
