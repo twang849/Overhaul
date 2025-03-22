@@ -1,7 +1,6 @@
 import Image from "next/image"
 import { Bot } from "lucide-react"
-import EnlargeButton from "../../components/ui/enlarge-button"
-import ReduceButton from "../../components/ui/reduce-button"
+import FontSizeButton from "../../components/ui/font-size-button"
 
 export default function Checkout() {
   return (
@@ -21,8 +20,7 @@ export default function Checkout() {
         </div>
 
         <div className="p-8">
-          <EnlargeButton/> 
-          <br/><ReduceButton/>
+          <FontSizeButton/>
           <h1 className="enlargeable text-4xl font-bold mb-8">Checkout</h1>
 
           <div className="space-y-4">

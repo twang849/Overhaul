@@ -2,16 +2,14 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
-import EnlargeButton from "@/components/ui/enlarge-button"
-import ReduceButton from "@/components/ui/reduce-button"
+import FontSizeButton from "@/components/ui/font-size-button"
 
 export default function Home() {
   return (
     <div className="min-h-screen">
       <section className="relative overflow-hidden bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c]">
         <div className="container mx-auto px-4 py-16 md:py-24">
-          <EnlargeButton/> 
-          <br/><ReduceButton/>
+          <FontSizeButton/>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
               <h1 className="enlargeable text-6xl font-bold tracking-tight">SmartCart</h1>
@@ -20,9 +18,9 @@ export default function Home() {
                 SmartCart revolutionizes grocery shopping with AI-powered, accessible, and seamless checkout solutions —
                 making every trip faster, easier, and smarter for all.
               </p>
-              <Button className="bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 py-6 text-lg">Download</Button>
+              <Button className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 py-6 text-lg">Download</Button>
               <Link href="/checkout" className="inline-block mt-4">
-                <Button variant="outline" className="border-[#5c5a7c] text-[#5c5a7c]">
+                <Button variant="outline" className="enlargeable border-[#5c5a7c] text-[#5c5a7c]">
                   Go to Checkout
                 </Button>
               </Link>
