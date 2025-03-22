@@ -156,7 +156,7 @@ const useTTS = () => {
                 SmartCart revolutionizes grocery shopping with AI-powered, accessible, and seamless checkout solutions —
                 making every trip faster, easier, and smarter for all.
               </p>
-              <Button id="magnify"
+              <Button
                 className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 py-6 text-lg"
                 onMouseEnter={() => handleMouseEnter("Download SmartCart")}
                 onMouseLeave={handleMouseLeave}
