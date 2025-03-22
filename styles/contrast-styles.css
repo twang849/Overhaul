@@ -440,3 +440,16 @@ html.high-contrast .bg-\[\#5c5a7c\]:hover {
 :root.high-contrast [for="fontSizeSlider"] {
   color: #ffffff !important;
 }
+
+/* Make download button match checkout button */
+:root.high-contrast button[aria-label="Download"],
+:root.high-contrast .download-button {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+:root.high-contrast button[aria-label="Download"]:hover,
+:root.high-contrast .download-button:hover {
+  background-color: #e6e600 !important;
+}
