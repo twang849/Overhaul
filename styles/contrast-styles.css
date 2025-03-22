@@ -1,4 +1,3 @@
-/* Base root variables */
 :root {
   --text-color: #000000;
   --background-color: #ffffff;
@@ -6,299 +5,263 @@
   --button-hover: #4a4865;
 }
 
-/* High Contrast Mode Variables */
+/* High Contrast Mode Styles */
 :root.high-contrast {
-  --background: #000000;
-  --foreground: #ffffff;
-  --primary: #ffff00;
-  --secondary: #00ffff;
-  --border: #ffffff;
-  --input: #ffffff;
-  --ring: #ffff00;
-  --text-color: #ffffff;
-  --background-color: #000000;
-  --button-bg: #ffff00;
-  --button-hover: #e6e600;
-}
+    --background: #000000;
+    --foreground: #ffffff;
+    --primary: #ffff00;
+    --secondary: #00ffff;
+    --border: #ffffff;
+    --input: #ffffff;
+    --ring: #ffff00;
+  }
+  
+  /* Override background in high contrast mode */
+  :root.high-contrast .bg-gradient-to-br {
+    background: #000000 !important;
+  }
+  
+  /* Text colors in high contrast mode */
+  :root.high-contrast h1,
+  :root.high-contrast h2,
+  :root.high-contrast p {
+    color: #ffffff !important;
+  }
+  
+  /* Button styling in high contrast mode */
+  :root.high-contrast button {
+    background-color: #ffff00 !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+  
+  /* Link buttons in high contrast mode */
+  :root.high-contrast a button {
+    background-color: #000000 !important;
+    color: #ffff00 !important;
+    border: 2px solid #ffff00 !important;
+  }
+  
+  /* Make sure the contrast toggle button itself is always visible */
+  button[aria-label="Enable high contrast"],
+  button[aria-label="Disable high contrast"] {
+    background-color: #ffffff !important;
+    border: 2px solid #000000 !important;
+    color: #000000 !important;
+    position: relative;
+    z-index: 100;
+  }
+  
+  /* High contrast toggle button when high contrast is enabled */
+  :root.high-contrast button[aria-label="Disable high contrast"] {
+    background-color: #000000 !important;
+    border: 2px solid #ffffff !important;
+    color: #ffffff !important;
+  }
+  
+  /* Contrast toggle icon colors */
+  button[aria-label="Enable high contrast"] svg,
+  button[aria-label="Disable high contrast"] svg {
+    color: #000000 !important;
+  }
+  
+  :root.high-contrast button[aria-label="Disable high contrast"] svg {
+    color: #ffffff !important;
+  }
+  
+  /* Phone mockup styles for high contrast mode - BLACK BACKGROUND WITH WHITE TEXT */
+  :root.high-contrast .rounded-\[40px\] {
+    border-color: #ffffff !important;
+    background-color: #000000 !important;
+  }
+  
+  :root.high-contrast .rounded-t-\[24px\] {
+    background-color: #000000 !important;
+  }
+  
+  :root.high-contrast .rounded-b-3xl {
+    background-color: #000000 !important;
+  }
+  
+  :root.high-contrast .rounded-full.bg-gray-500 {
+    background-color: #000000 !important;
+  }
+  
+  :root.high-contrast .aspect-\[9\/19\] {
+    background-color: #ffffff !important; /* Change to white background */
+  }
+  
+  :root.high-contrast .aspect-\[9\/19\] div {
+    color: #000000 !important; /* Keep text black */
+  }
+  
+  :root.high-contrast .bg-\[#c8c2f0\] {
+    background-color: #ffffff !important; /* Change to white */
+    color: #000000 !important;
+    border: 1px solid #000000 !important;
+  }
+  
+  :root.high-contrast .bg-\[#e0f7e0\] {
+    background-color: #ffffff !important; /* Change to white */
+    color: #000000 !important;
+    border: 1px solid #000000 !important;
+  }
+  
+  :root.high-contrast .absolute.bottom-2.right-2 {
+    background-color: #000000 !important;
+    color: #ffffff !important; /* Make "scanning..." text white */
+    border: 1px solid #ffffff !important;
+  }
+  
+  :root.high-contrast .flex.items-center.justify-center {
+    color: #000000 !important;
+  }
 
-/* ===== GENERAL ELEMENTS ===== */
-/* Background colors */
-:root.high-contrast .bg-gradient-to-br,
-:root.high-contrast .bg-white,
-:root.high-contrast .min-h-screen.bg-white,
-:root.high-contrast .checkout-page,
-:root.high-contrast .checkout-container {
-  background-color: var(--background) !important;
-  border: none !important;
-}
+  :root.high-contrast header {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #ffffff !important;
+  }
 
-/* Text colors */
-:root.high-contrast h1,
-:root.high-contrast h2,
-:root.high-contrast p,
-:root.high-contrast .text-xl,
-:root.high-contrast .text-2xl,
-:root.high-contrast .text-4xl,
-:root.high-contrast .text-lg,
-:root.high-contrast .checkout-form label,
-:root.high-contrast .Bot,
-:root.high-contrast header .text-black,
-:root.high-contrast header [class*="text-black"],
-:root.high-contrast label.enlargeable,
-:root.high-contrast [for="fontSizeSlider"],
-:root.high-contrast .font-size-label {
-  color: var(--foreground) !important;
-}
+  :root.high-contrast header nav a,
+  :root.high-contrast header .text-black {
+    color: #ffffff !important;
+    text-decoration: none;
+  }
 
-/* SVG and Icon colors */
-:root.high-contrast .Bot,
-:root.high-contrast svg[data-lucide="Bot"],
-:root.high-contrast .lucide-bot,
-:root.high-contrast [data-icon="bot"],
-:root.high-contrast button[aria-label="Adjust font size"] svg {
-  color: var(--foreground) !important;
-  stroke: var(--foreground) !important;
-}
+  :root.high-contrast header nav a:hover,
+  :root.high-contrast header .text-black:hover {
+    color: #ffff00 !important;
+    text-decoration: underline !important;
+  }
 
-/* ===== HEADER ===== */
-:root.high-contrast header {
-  background-color: var(--background) !important;
-  color: var(--foreground) !important;
-  border-bottom: 2px solid var(--foreground) !important;
-}
+  :root.high-contrast header [class*="text-black"] {
+    color: #ffffff !important;
+  }
 
-:root.high-contrast header nav a,
-:root.high-contrast header .text-black {
-  color: var(--foreground) !important;
-  text-decoration: none;
-}
+  :root.high-contrast [class*="text-black"] {
+    color: #000000 !important;
+  }
+  
+  :root.high-contrast [class*="hover\\:text-gray-700"]:hover {
+    color: #ffff00 !important;
+  }
 
-:root.high-contrast header nav a:hover,
-:root.high-contrast header .text-black:hover,
-:root.high-contrast [class*="hover\\:text-gray-700"]:hover {
-  color: var(--primary) !important;
-  text-decoration: underline !important;
-}
+  :root.high-contrast .view-cart-button {
+    background-color: #000000 !important;
+    color: #000000 !important;
+    border: 1px solid #ffffff !important;
+  }
+  
+  :root.high-contrast .view-cart-button svg {
+    color: #ffffff !important;
+  }
 
-/* ===== BUTTONS ===== */
-/* Standard buttons */
-:root.high-contrast button[aria-label="Enable high contrast"],
-:root.high-contrast button[aria-label="Disable high contrast"] {
-  background-color: var(--foreground) !important;
-  border: 2px solid var(--background) !important;
-  color: var(--background) !important;
-  position: relative;
-  z-index: 100;
-  margin-right: 0.5rem !important;
-  margin-bottom: 0.5rem !important;
-}
+  :root.high-contrast .purple-bg {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
 
-:root.high-contrast button[aria-label="Disable high contrast"] {
-  background-color: var(--background) !important;
-  border: 2px solid var(--foreground) !important;
-  color: var(--foreground) !important;
-}
+  :root.high-contrast .phone-bg {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
 
-:root.high-contrast button[aria-label="Enable high contrast"] svg,
-:root.high-contrast button[aria-label="Disable high contrast"] svg {
-  color: var(--background) !important;
-}
+  :root.high-contrast .bg-white\/80 {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
 
-:root.high-contrast button[aria-label="Disable high contrast"] svg {
-  color: var(--foreground) !important;
-}
+  :root.high-contrast header button {
+    background-color: #ffff00 !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
 
-/* Header and action buttons */
+  :root.high-contrast header button:hover {
+    background-color: #e6e600 !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  :root.high-contrast header .bg-\[\#5c5a7c\]:hover,
+  :root.high-contrast header .hover\:bg-\[#4a4865\]:hover {
+    background-color: #e6e600 !important;
+    color: #000000 !important;
+  }
+
+/* Make header buttons more specific to prevent override */
 :root.high-contrast header button,
 :root.high-contrast header .bg-\[\#5c5a7c\],
-:root.high-contrast header button.bg-\[\#5c5a7c\],
-:root.high-contrast .checkout-button,
-:root.high-contrast button[aria-label="Download"],
-:root.high-contrast .download-button,
-:root.high-contrast a.download-button,
-:root.high-contrast button.download-button,
-:root.high-contrast [class*="download"] {
-  background-color: var(--primary) !important;
-  color: var(--background) !important;
-  border: 2px solid var(--foreground) !important;
-  padding: 0.5rem 1rem !important;
-  cursor: pointer !important;
-  text-decoration: none !important;
+:root.high-contrast header button.bg-\[\#5c5a7c\] {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
 }
 
 :root.high-contrast header button:hover,
 :root.high-contrast header .bg-\[\#5c5a7c\]:hover,
 :root.high-contrast header button.bg-\[\#5c5a7c\]:hover,
-:root.high-contrast header .hover\:bg-\[\#4a4865\]:hover,
-:root.high-contrast .checkout-button:hover,
-:root.high-contrast button[aria-label="Download"]:hover,
-:root.high-contrast .download-button:hover,
-:root.high-contrast a.download-button:hover,
-:root.high-contrast button.download-button:hover,
-:root.high-contrast [class*="download"]:hover {
-  background-color: var(--button-hover) !important;
-  color: var(--background) !important;
-  border: 2px solid var(--foreground) !important;
+:root.high-contrast header .hover\:bg-\[\#4a4865\]:hover {
+  background-color: #e6e600 !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
 }
 
-:root.high-contrast button[aria-label="Download"] svg,
-:root.high-contrast .download-button svg,
-:root.high-contrast button.download-button svg {
-  color: var(--background) !important;
-  stroke: var(--background) !important;
+/* Prevent any other styles from overriding the hover state */
+:root.high-contrast header button:hover .bg-\[\#5c5a7c\],
+:root.high-contrast header button:hover.hover\:bg-\\[\#4a4865\\] {
+  background-color: #e6e600 !important;
+  color: #000000 !important;
 }
 
-/* Font size adjustment button */
-:root.high-contrast button[aria-label="Adjust font size"],
-:root.high-contrast button[aria-label="Adjust font size"] span {
-  color: var(--foreground) !important;
-  margin-right: 0.5rem !important;
-  margin-bottom: 0.5rem !important;
+/* Checkout page specific styles for high contrast mode */
+:root.high-contrast .checkout-page {
+  background-color: #000000 !important;
+  color: #ffffff !important;
 }
 
-/* Cart button */
-:root.high-contrast .view-cart-button {
-  background-color: var(--background) !important;
-  color: var(--background) !important;
-  border: 1px solid var(--foreground) !important;
+:root.high-contrast .checkout-container {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
 }
 
-:root.high-contrast .view-cart-button svg {
-  color: var(--foreground) !important;
-}
-
-/* ===== FORMS AND INPUTS ===== */
 :root.high-contrast .checkout-form input,
 :root.high-contrast .checkout-form select {
-  background-color: var(--background) !important;
-  color: var(--foreground) !important;
-  border: 1px solid var(--foreground) !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
 }
 
-/* Toggle switches */
-:root.high-contrast [role="switch"][aria-label="Toggle text-to-speech"] {
-  background-color: var(--background) !important;
-  border: 2px solid var(--foreground) !important;
-  outline: 2px solid var(--foreground) !important;
-  outline-offset: 2px !important;
+:root.high-contrast .checkout-form label {
+  color: #ffffff !important;
 }
 
-:root.high-contrast [role="switch"][aria-label="Toggle text-to-speech"][data-state="checked"] {
-  background-color: var(--primary) !important;
-  outline: 2px solid var(--foreground) !important;
-  outline-offset: 2px !important;
-}
-
-:root.high-contrast [role="switch"][aria-label="Toggle text-to-speech"] span {
-  background-color: var(--foreground) !important;
-}
-
-/* ===== PHONE MOCKUP STYLES ===== */
-:root.high-contrast .rounded-\[40px\],
-:root.high-contrast .rounded-t-\[24px\],
-:root.high-contrast .rounded-b-3xl,
-:root.high-contrast .rounded-full.bg-gray-500 {
-  border-color: var(--foreground) !important;
-  background-color: var(--background) !important;
-}
-
-:root.high-contrast .aspect-\[9\/19\] {
-  background-color: var(--foreground) !important;
-}
-
-:root.high-contrast .aspect-\[9\/19\] div {
-  color: var(--background) !important;
-}
-
-:root.high-contrast .bg-\[#c8c2f0\],
-:root.high-contrast .bg-\[#e0f7e0\] {
-  background-color: var(--foreground) !important;
-  color: var(--background) !important;
-  border: 1px solid var(--background) !important;
-}
-
-:root.high-contrast .absolute.bottom-2.right-2 {
-  background-color: var(--background) !important;
-  color: var(--foreground) !important;
-  border: 1px solid var(--foreground) !important;
-}
-
-/* ===== ORDER SUMMARY AND CHECKOUT ===== */
 :root.high-contrast .order-summary {
-  background-color: var(--background) !important;
-  color: var(--foreground) !important;
-  border: 1px solid var(--foreground) !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
 }
 
 :root.high-contrast .order-item {
-  border-bottom: 1px solid var(--foreground) !important;
+  border-bottom: 1px solid #ffffff !important;
 }
 
 :root.high-contrast .price-details {
-  color: var(--foreground) !important;
+  color: #ffffff !important;
 }
 
-:root.high-contrast .bg-white\/20,
-:root.high-contrast .bg-gray-200,
-:root.high-contrast .bg-white\/10.backdrop-blur-sm {
-  background-color: var(--background) !important;
-  color: var(--foreground) !important;
-  border: 1px solid var(--foreground) !important;
+:root.high-contrast .checkout-button {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
 }
 
-:root.high-contrast .border-b {
-  border-color: var(--foreground) !important;
+:root.high-contrast .checkout-button:hover {
+  background-color: #e6e600 !important;
 }
 
-:root.high-contrast .text-sm.text-white {
-  color: var(--foreground) !important;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
-}
-
-/* ===== BACKGROUNDS ===== */
-/* All purple elements should be black in high contrast mode */
-:root.high-contrast .purple-bg,
-:root.high-contrast .bg-\[#5c5a7c\],
-:root.high-contrast .bg-\[#5c5a7c\].purple-bg,
-:root.high-contrast .bg-\[#5c5a7c\].p-6.relative.purple-bg,
-:root.high-contrast .bg-\[#5c5a7c\].p-6.relative,
-:root.high-contrast [class*="bg-[#5c5a7c]"],
-:root.high-contrast [class*="bg-[#4a4865]"] {
-  background-color: var(--background) !important;
-  color: var(--foreground) !important;
-}
-
-:root.high-contrast .phone-bg,
-:root.high-contrast .bg-white\/80 {
-  background-color: var(--foreground) !important;
-  color: var(--background) !important;
-}
-
-/* Prevent background changes on hover */
-:root.high-contrast .hover\:bg-primary:hover,
-:root.high-contrast .hover\:bg-primary\/80:hover,
-:root.high-contrast .hover\:bg-primary\/90:hover,
-:root.high-contrast .hover\:bg-\[\#4a4865\]:hover,
-:root.high-contrast .purple-bg:hover,
-:root.high-contrast .bg-\[#5c5a7c\]:hover,
-:root.high-contrast .bg-\[#5c5a7c\].p-6.relative:hover,
-:root.high-contrast .bg-\[#5c5a7c\].p-6.relative.purple-bg:hover {
-  background-color: var(--background) !important;
-  color: var(--foreground) !important;
-}
-
-/* Make sure all elements with purple background styles are overridden */
-:root.high-contrast div[class*="5c5a7c"],
-:root.high-contrast section[class*="5c5a7c"],
-:root.high-contrast nav[class*="5c5a7c"],
-:root.high-contrast aside[class*="5c5a7c"],
-:root.high-contrast footer[class*="5c5a7c"],
-:root.high-contrast main[class*="5c5a7c"] {
-  background-color: var(--background) !important;
-  color: var(--foreground) !important;
-}
-
-/* For older browsers that might use html.high-contrast instead of :root.high-contrast */
 html.high-contrast {
   --text-color: #ffffff;
   --background-color: #000000;
@@ -306,89 +269,270 @@ html.high-contrast {
   --button-hover: #e6e600;
 }
 
-/* Extend the html fallback to catch all purple elements */
-html.high-contrast .bg-\[#5c5a7c\],
-html.high-contrast .bg-\[#4a4865\],
-html.high-contrast .purple-bg,
-html.high-contrast [class*="5c5a7c"],
-html.high-contrast [class*="4a4865"] {
+html.high-contrast .bg-gradient-to-br {
+  background: var(--background-color) !important;
+}
+
+html.high-contrast h1,
+html.high-contrast h2,
+html.high-contrast p {
+  color: var(--text-color) !important;
+}
+
+html.high-contrast .bg-white\/10 {
+  background-color: var(--text-color) !important;
+}
+
+html.high-contrast .text-white {
+  color: var(--background-color) !important;
+}
+
+html.high-contrast .bg-\[\#5c5a7c\] {
+  background-color: var(--button-bg) !important;
+  color: var(--background-color) !important;
+}
+
+html.high-contrast .bg-\[\#5c5a7c\]:hover {
+  background-color: var(--button-hover) !important;
+}
+
+/* Checkout page specific styles */
+:root.high-contrast .bg-\[#5c5a7c\] {
   background-color: #000000 !important;
   color: #ffffff !important;
 }
 
-/* Additional rules to ensure all purple elements are black in high contrast mode */
-
-/* Target the main gradient background */
-:root.high-contrast .bg-gradient-to-br,
-:root.high-contrast [class*="from-[#c8c2f0]"],
-:root.high-contrast [class*="via-[#8a82c5]"],
-:root.high-contrast [class*="to-[#5c5a7c]"],
-:root.high-contrast .bg-gradient-to-br.from-\[\#c8c2f0\].via-\[\#8a82c5\].to-\[\#5c5a7c\] {
-  background: var(--background) !important;
-  background-image: none !important;
+:root.high-contrast .bg-white\/20 {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
 }
 
-/* Target any elements with purple background colors by their color code */
-:root.high-contrast [class*="bg-[#c8c2f0]"],
-:root.high-contrast [class*="bg-[#8a82c5]"],
-:root.high-contrast [class*="bg-[#a599e9]"],
-:root.high-contrast [class*="from-[#c8c2f0]"],
-:root.high-contrast [class*="to-[#a599e9]"] {
-  background: var(--background) !important;
-  background-image: none !important;
+:root.high-contrast .bg-gray-200 {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
 }
 
-/* Target the phone interface elements specifically */
-:root.high-contrast .phone-bg .bg-gradient-to-r,
-:root.high-contrast .phone-bg [class*="from-[#c8c2f0]"],
-:root.high-contrast .phone-bg [class*="to-[#a599e9]"] {
-  background: var(--foreground) !important;
-  color: var(--background) !important;
+:root.high-contrast .bg-white {
+  background-color: #000000 !important;
 }
 
-/* Ensure magnifier tool displays correctly in high contrast mode */
-:root.high-contrast .magnifier-container {
-  border: 2px solid var(--foreground) !important;
+:root.high-contrast .border-b {
+  border-color: #ffffff !important;
 }
 
-:root.high-contrast .magnifier-glass {
-  border: 2px solid var(--foreground) !important;
+:root.high-contrast .text-xl,
+:root.high-contrast .text-2xl,
+:root.high-contrast .text-4xl,
+:root.high-contrast .text-lg {
+  color: #ffffff !important;
 }
 
-/* Ensure all Tailwind purple color shortcuts are caught */
-:root.high-contrast .bg-purple-100,
-:root.high-contrast .bg-purple-200,
-:root.high-contrast .bg-purple-300,
-:root.high-contrast .bg-purple-400,
-:root.high-contrast .bg-purple-500,
-:root.high-contrast .bg-purple-600,
-:root.high-contrast .bg-purple-700,
-:root.high-contrast .bg-purple-800,
-:root.high-contrast .bg-purple-900 {
-  background-color: var(--background) !important;
-  color: var(--foreground) !important;
+:root.high-contrast .bg-white.p-2 {
+  background-color: #000000 !important;
+  border-color: #ffffff !important;
 }
 
-/* Ensure download button is properly visible in high contrast */
+:root.high-contrast .Bot {
+  color: #ffffff !important;
+}
+
+/* Checkout page grid border separation */
+:root.high-contrast .grid.md\:grid-cols-2 {
+  border: 1px solid #ffffff !important;
+}
+
+:root.high-contrast .grid.md\:grid-cols-2 > div:first-child {
+  border-right: 2px solid #ffffff !important;
+}
+
+/* Ensure the existing styles remain consistent */
+:root.high-contrast .bg-\[#5c5a7c\] {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Fix font size adjustment and bot logo visibility */
+:root.high-contrast .Bot {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+:root.high-contrast [aria-label="Adjust font size"] {
+  color: #ffffff !important;
+}
+
+:root.high-contrast .font-size-label {
+  color: #ffffff !important;
+}
+
+:root.high-contrast svg[data-lucide="Bot"] {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Prevent yellow hover effect in checkout page */
+:root.high-contrast .hover\:bg-primary:hover,
+:root.high-contrast .hover\:bg-primary\/80:hover,
+:root.high-contrast .hover\:bg-primary\/90:hover {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+:root.high-contrast .hover\:bg-\[\#4a4865\]:hover {
+  background-color: #000000 !important;
+}
+
+/* Fix hover effect in checkout page */
+:root.high-contrast .bg-\[#5c5a7c\].p-6.relative.purple-bg:hover {
+  background-color: #000000 !important;
+}
+
+/* Override any existing hover styles */
+:root.high-contrast .purple-bg:hover {
+  background-color: #000000 !important;
+}
+
+/* Ensure no background color changes on hover for checkout page */
+:root.high-contrast .bg-\[#5c5a7c\].purple-bg {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Fix bot icon and font size button in checkout page */
+:root.high-contrast .lucide-bot {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+:root.high-contrast button[aria-label="Adjust font size"],
+:root.high-contrast button[aria-label="Adjust font size"] span {
+  color: #ffffff !important;
+}
+
+:root.high-contrast button[aria-label="Adjust font size"] svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+:root.high-contrast [data-icon="bot"] {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Fix white outline and button positioning */
+:root.high-contrast .min-h-screen.bg-white {
+  background-color: #000000 !important;
+  border: none !important;
+}
+
+/* Position controls consistently */
+:root.high-contrast button[aria-label="Adjust font size"],
+:root.high-contrast button[aria-label="Enable high contrast"],
+:root.high-contrast button[aria-label="Disable high contrast"] {
+  margin-right: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Remove any remaining white borders */
+:root.high-contrast .grid.md\:grid-cols-2 {
+  border: none !important;
+}
+
+:root.high-contrast [role="switch"][aria-label="Toggle text-to-speech"] {
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  outline: 2px solid #ffffff !important;
+  outline-offset: 2px !important;
+}
+
+:root.high-contrast [role="switch"][aria-label="Toggle text-to-speech"][data-state="checked"] {
+  background-color: #ffff00 !important;
+  outline: 2px solid #ffffff !important;
+  outline-offset: 2px !important;
+}
+
+:root.high-contrast [role="switch"][aria-label="Toggle text-to-speech"] span {
+  background-color: #ffffff !important;
+}
+
+:root.high-contrast .text-sm.text-white {
+  color: #ffffff !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+:root.high-contrast .bg-white\/10.backdrop-blur-sm {
+  border: 2px solid #ffffff !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.high-contrast label.enlargeable {
+  color: #ffffff !important;
+}
+
+:root.high-contrast .bg-white\/10.backdrop-blur-sm label {
+  color: #ffffff !important;
+}
+
+:root.high-contrast [for="fontSizeSlider"] {
+  color: #ffffff !important;
+}
+
+/* Make download button match checkout button */
+:root.high-contrast button[aria-label="Download"],
+:root.high-contrast .download-button {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+:root.high-contrast button[aria-label="Download"]:hover,
+:root.high-contrast .download-button:hover {
+  background-color: #e6e600 !important;
+}
+
+/* Download button styles for high contrast mode */
+:root.high-contrast button[aria-label="Download"],
 :root.high-contrast .download-button,
 :root.high-contrast a.download-button,
-:root.high-contrast button.download-button,
-:root.high-contrast button:has(.download) {
-  background-color: var(--primary) !important;
-  color: var(--background) !important;
-  border: 2px solid var(--foreground) !important;
+:root.high-contrast button.download-button {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  padding: 0.5rem 1rem !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
 }
 
-/* Add this if .sr-only is not already defined */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+:root.high-contrast button[aria-label="Download"]:hover,
+:root.high-contrast .download-button:hover,
+:root.high-contrast a.download-button:hover,
+:root.high-contrast button.download-button:hover {
+  background-color: #e6e600 !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
 }
+
+:root.high-contrast button[aria-label="Download"] svg,
+:root.high-contrast .download-button svg,
+:root.high-contrast button.download-button svg {
+  color: #000000 !important;
+  stroke: #000000 !important;
+}
+
+/* Override any competing download button styles */
+:root.high-contrast [class*="download"] {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+}
+
+:root.high-contrast [class*="download"]:hover {
+  background-color: #e6e600 !important;
+  color: #000000 !important;
+}
+
 

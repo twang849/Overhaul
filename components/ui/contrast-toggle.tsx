@@ -32,15 +32,13 @@ export function ContrastToggle() {
   return (
     <Button
       variant="outline"
-      size="icon"
+      size="sm"
       onClick={toggleContrast}
       aria-label={highContrast ? "Disable high contrast" : "Enable high contrast"}
-      className="contrast-toggle-button relative"
+      className="contrast-toggle-button relative flex items-center gap-2"
     >
-      {highContrast ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
-      <span className="sr-only">
-        {highContrast ? "Disable high contrast mode" : "Enable high contrast mode"}
-      </span>
+      {highContrast ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+      <span>High Contrast</span>
     </Button>
   )
 }
