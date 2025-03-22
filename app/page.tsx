@@ -178,7 +178,7 @@ export default function Home() {
                           title="Fresh yellow bananas bundled together, perfect for a healthy snack or smoothie"
                           width={300}
                           height={400}
-                          className="object-cover rounded-lg transform transition-transform duration-300 hover:brightness-105"
+                          className="enlargeable object-cover rounded-lg transform transition-transform duration-300 hover:brightness-105"
                           onMouseEnter={() => speak("Yellow bananas bundled together. Each banana is uniformly ripe with a bright yellow peel.")}
                           onMouseLeave={stopSpeaking}
                         />
