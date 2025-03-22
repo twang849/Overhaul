@@ -32,10 +32,11 @@ export function MagnifierToggle() {
     <Button
       id="magnify"
       variant="outline"
-      size="icon"
+      size="lg"
       onClick={toggleMagnifier}
       className="magnifier-toggle-button"
     >
+      <div style={{fontSize: '16px'}}>Magnifying<br/>Glass</div>
       {/* Correct the icon rendering */}
       {magnifierActive ? <Search className="h-5 w-5" /> : <X className="h-5 w-5" />}
     </Button>
