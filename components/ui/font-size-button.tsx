@@ -32,7 +32,7 @@ export default function FontSizeSlider() {
   }
 
   return (
-    <div style={{ marginTop: '10px', marginBottom: '10px' }}>
+    <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2" style={{ marginTop: '10px', marginBottom: '10px' }}>
       <label className='enlargeable' htmlFor="fontSizeSlider">Adjust Font Size:</label>
       <input
         id="fontSizeSlider"
