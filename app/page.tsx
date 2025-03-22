@@ -6,6 +6,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useState, useCallback } from "react"
 import { Switch } from "@/components/ui/switch"
+import FontSizeButton from "@/components/ui/font-size-button"
 
 // Custom hook for TTS functionality
 const useTTS = () => {
@@ -57,34 +58,37 @@ export default function Home() {
     <div className="min-h-screen">
       <section className="relative overflow-hidden bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c]">
         <div className="container mx-auto px-4 py-16 md:py-24">
-          {/* TTS Toggle Switch */}
-          <div className="absolute top-4 right-4 flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
-            <span className="text-sm text-white">Text-to-Speech</span>
-            <Switch
-              checked={isTTSEnabled}
-              onCheckedChange={setIsTTSEnabled}
-              aria-label="Toggle text-to-speech"
-            />
+          {/* Accessibility Controls */}
+          <div className="absolute top-4 right-4 flex items-center space-x-4">
+            <FontSizeButton />
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+              <span className="text-sm text-white">Text-to-Speech</span>
+              <Switch
+                checked={isTTSEnabled}
+                onCheckedChange={setIsTTSEnabled}
+                aria-label="Toggle text-to-speech"
+              />
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
               <h1 
-                className="text-6xl font-bold tracking-tight"
+                className="enlargeable text-6xl font-bold tracking-tight"
                 onMouseEnter={() => speak("SmartCart")}
                 onMouseLeave={stopSpeaking}
               >
                 SmartCart
               </h1>
               <h2 
-                className="text-3xl font-medium"
+                className="enlargeable text-3xl font-medium"
                 onMouseEnter={() => speak("Shop Smarter, Checkout Faster!")}
                 onMouseLeave={stopSpeaking}
               >
                 Shop Smarter, Checkout Faster!
               </h2>
               <p 
-                className="text-lg max-w-md"
+                className="enlargeable text-lg max-w-md"
                 onMouseEnter={() => speak("SmartCart revolutionizes grocery shopping with AI-powered, accessible, and seamless checkout solutions — making every trip faster, easier, and smarter for all.")}
                 onMouseLeave={stopSpeaking}
               >
@@ -92,7 +96,7 @@ export default function Home() {
                 making every trip faster, easier, and smarter for all.
               </p>
               <Button 
-                className="bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 py-6 text-lg"
+                className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 py-6 text-lg"
                 onMouseEnter={() => speak("Download SmartCart")}
                 onMouseLeave={stopSpeaking}
               >
@@ -101,7 +105,7 @@ export default function Home() {
               <Link href="/checkout" className="inline-block mt-4">
                 <Button 
                   variant="outline" 
-                  className="border-[#5c5a7c] text-[#5c5a7c]"
+                  className="enlargeable border-[#5c5a7c] text-[#5c5a7c]"
                   onMouseEnter={() => speak("Go to Checkout")}
                   onMouseLeave={stopSpeaking}
                 >
@@ -127,14 +131,14 @@ export default function Home() {
                   <div className="aspect-[9/19] overflow-hidden bg-gradient-to-b from-gray-50 to-white">
                     <div className="p-4 flex flex-col h-full">
                       <div 
-                        className="bg-gradient-to-r from-[#c8c2f0] to-[#a599e9] rounded-lg p-3 mb-3 text-center text-white shadow-md transition-transform hover:scale-[1.02]"
+                        className="enlargeable bg-gradient-to-r from-[#c8c2f0] to-[#a599e9] rounded-lg p-3 mb-3 text-center text-white shadow-md transition-transform hover:scale-[1.02]"
                         onMouseEnter={() => speak("View Cart")}
                         onMouseLeave={stopSpeaking}
                       >
                         View Cart <ShoppingCart className="inline-block ml-1 h-4 w-4" />
                       </div>
                       <div 
-                        className="flex items-center mb-3 bg-white/80 backdrop-blur-sm rounded-lg p-2 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md hover:bg-white/90 cursor-pointer"
+                        className="enlargeable flex items-center mb-3 bg-white/80 backdrop-blur-sm rounded-lg p-2 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md hover:bg-white/90 cursor-pointer"
                         onMouseEnter={() => speak("Banana Bundle - Large Detected")}
                         onMouseLeave={stopSpeaking}
                       >
@@ -158,7 +162,7 @@ export default function Home() {
                           scanning...
                         </div>
                         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute inset-0 bg-black/75 flex items-center justify-center p-4 rounded-lg">
-                          <p className="text-white text-center text-sm">
+                          <p className="enlargeable text-white text-center text-sm">
                             Yellow bananas bundled together. Each banana is uniformly ripe with a bright yellow peel.
                           </p>
                         </div>

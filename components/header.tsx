@@ -12,31 +12,31 @@ export default function Header() {
       </div>
 
       <nav className="hidden md:flex items-center space-x-8">
-        <Link href="/" className="text-black hover:text-gray-700">
+        <Link href="/" className="enlargeable text-black hover:text-gray-700">
           Home
         </Link>
-        <Link href="/ai" className="text-black hover:text-gray-700">
+        <Link href="/ai" className="enlargeable text-black hover:text-gray-700">
           AI
         </Link>
-        <Link href="/about" className="text-black hover:text-gray-700">
+        <Link href="/about" className="enlargeable text-black hover:text-gray-700">
           About Us
         </Link>
-        <Link href="/mission" className="text-black hover:text-gray-700">
+        <Link href="/mission" className="enlargeable text-black hover:text-gray-700">
           Mission
         </Link>
-        <Link href="/help" className="text-black hover:text-gray-700">
+        <Link href="/help" className="enlargeable text-black hover:text-gray-700">
           Help
         </Link>
-        <Link href="/checkout" className="text-black hover:text-gray-700">
+        <Link href="/checkout" className="enlargeable text-black hover:text-gray-700">
           Checkout
         </Link>
       </nav>
 
       <div className="flex items-center space-x-4">
-        <Link href="/login" className="text-black hover:text-gray-700">
+        <Link href="/login" className="enlargeable text-black hover:text-gray-700">
           Log In
         </Link>
-        <Button className="bg-[#5c5a7c] hover:bg-[#4a4865]">SIGN UP</Button>
+        <Button className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865]">SIGN UP</Button>
       </div>
     </header>
   )
