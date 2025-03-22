@@ -38,7 +38,7 @@ export default function FontSizeSlider() {
 
   return (
     <div style={{ marginTop: '10px', marginBottom: '10px' }}>
-      <label htmlFor="fontSizeSlider">Adjust Font Size:</label>
+      <label className='enlargeable' htmlFor="fontSizeSlider">Adjust Font Size:</label>
       <input
         id="fontSizeSlider"
         type="range"
@@ -48,7 +48,7 @@ export default function FontSizeSlider() {
         onChange={handleSliderChange}
         style={{ marginLeft: '10px' }}
       />
-      <span style={{ marginLeft: '10px' }}>{fontSize}px</span>
+      {/* <span className='enlargeable' style={{ marginLeft: '10px' }}>{fontSize}px</span> */}
     </div>
   );
 }

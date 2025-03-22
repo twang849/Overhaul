@@ -62,10 +62,10 @@ export default function Home() {
           <div className="absolute top-4 right-4 flex items-center space-x-4">
             <FontSizeButton />
             <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
-              <span className="text-sm text-white">Text-to-Speech</span>
+              <span className="enlargeable text-sm text-white">Text-to-Speech</span>
               <Switch
                 checked={isTTSEnabled}
-                onCheckedChange={setIsTTSEnabled}
+                onCheckedChange={() => setIsTTSEnabled(!isTTSEnabled)}
                 aria-label="Toggle text-to-speech"
               />
             </div>
@@ -154,7 +154,7 @@ export default function Home() {
                           title="Fresh yellow bananas bundled together, perfect for a healthy snack or smoothie"
                           width={300}
                           height={400}
-                          className="object-cover rounded-lg transform transition-transform duration-300 hover:brightness-105"
+                          className="enlargeable object-cover rounded-lg transform transition-transform duration-300 hover:brightness-105"
                           onMouseEnter={() => speak("Yellow bananas bundled together. Each banana is uniformly ripe with a bright yellow peel.")}
                           onMouseLeave={stopSpeaking}
                         />
