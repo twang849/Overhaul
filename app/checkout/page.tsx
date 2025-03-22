@@ -6,9 +6,13 @@ import FontSizeButton from "../../components/ui/font-size-button"
 import { ContrastToggle } from "@/components/ui/contrast-toggle";
 import "@/styles/contrast-styles.css";
 import { useState, useCallback, useRef, useEffect } from "react";
-
-export default function Checkout() {
+export default function Checkout() { 
+  const openCounterWindow = () => {
+      // Open the new HTML file in a new window
+      window.open("/counter.html", "_blank", "width=500,height=500");
+    };
   const useTTS = () => {
+   
     const [isTTSEnabled, setIsTTSEnabled] = useState(false)
     const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
   
@@ -82,6 +86,7 @@ export default function Checkout() {
         document.documentElement.classList.add("high-contrast");
       }
     }, []);
+    
 
   return (
     <div className="min-h-screen bg-white">
@@ -118,7 +123,50 @@ export default function Checkout() {
               <span>$1.98</span>
             </div>
           </div>
-          
+          <div className="mt-8 flex justify-center">
+      <Image 
+        src="applepay.jpg" 
+        alt="Apple Pay" 
+        width={200} 
+        height={50} 
+        className="object-contain"
+      />
+    </div>
+
+
+
+
+
+
+  {/* Pay at Counter with Cash Button */}
+   {/* Pay at the Counter with Cash Button */}
+   <button
+        className="bg-green-600 text-white px-60 py-3 rounded-md hover:bg-green-700 transition"
+        onClick={openCounterWindow}
+      >
+        Pay at the Counter with Cash
+      </button>
+
+
+
+
+
+
+
+
+
+
+
+  <Image 
+        src="paypaletc.png" 
+        alt="Apple Pay" 
+        width={500} 
+        height={80} 
+        className="object-contain"
+      />
+  
+
+              
           <div className="mt-16">
             <div className="flex items-start gap-4">
               <div className="bg-white p-2 rounded-full border">
