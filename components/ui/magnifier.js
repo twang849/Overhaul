@@ -32,7 +32,7 @@ export function enableMagnifier() {
   document.body.append(handle);
 
   document.addEventListener("pointermove", moveMagnifyingGlass);
-  magnifyingGlass.addEventListener("dblclick", removeMagnifyingGlass);
+  magnifyingGlass.addEventListener("click", removeMagnifyingGlass);
 }
 
 export function disableMagnifier() {
