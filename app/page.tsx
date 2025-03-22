@@ -66,6 +66,18 @@ const useTTS = () => {
 }
 
 export default function Home() {
+  useEffect(() => {
+    // Create a script element
+    const script = document.createElement('script');
+    script.src = './magnifier.js'; // Adjust the path as needed
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup the script when the component unmounts
+      document.body.removeChild(script);
+    };
+  }, []);
   // Initialize TTS hook
   const { isTTSEnabled, setIsTTSEnabled, speak, stopSpeaking } = useTTS()
 
@@ -181,7 +193,7 @@ export default function Home() {
                       </div>
                       <div className="flex-1 relative rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:-translate-y-1 group">
                         <Image
-                          src="/20175355001_front_a06_@2.png"
+                          src="./bananas.png"
                           alt="Fresh yellow bananas bundled together, perfect for a healthy snack or smoothie. Each banana is uniformly ripe with a bright yellow peel."
                           title="Fresh yellow bananas bundled together, perfect for a healthy snack or smoothie"
                           width={300}
