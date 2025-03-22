@@ -1,3 +1,6 @@
+# Make sure you have these packages:
+pip install flask opencv-python numpy
+
 # Download OpenCV
 pip install opencv-python
 
