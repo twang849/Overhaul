@@ -30,38 +30,55 @@ export default function Home() {
     
             <div className="relative">
               <div className="relative mx-auto max-w-[300px]">
-                <div className="relative z-10 overflow-hidden rounded-[40px] border-8 border-black bg-black shadow-xl">
+                <div className="relative z-10 overflow-hidden rounded-[40px] border-[12px] border-black bg-black shadow-2xl ring-1 ring-gray-900/10">
                   <div className="relative pt-6 bg-black rounded-t-[24px]">
                     <div className="absolute top-0 inset-x-0">
-                      <div className="h-6 w-40 mx-auto bg-black rounded-b-3xl"></div>
+                      <div className="h-6 w-40 mx-auto bg-black rounded-b-3xl flex items-center justify-center">
+                        <div className="h-1 w-16 bg-gray-800 rounded-full"></div>
+                      </div>
                     </div>
-                    <div className="absolute right-5 top-2">
-                      <div className="h-2 w-2 rounded-full bg-gray-500"></div>
+                    <div className="absolute right-5 top-2 flex space-x-1">
+                      <div className="h-2 w-2 rounded-full bg-gray-600"></div>
+                      <div className="h-2 w-2 rounded-full bg-gray-700"></div>
                     </div>
                   </div>
-                  <div className="aspect-[9/19] overflow-hidden bg-white">
+                  <div className="aspect-[9/19] overflow-hidden bg-gradient-to-b from-gray-50 to-white">
                     <div className="p-4 flex flex-col h-full">
-                      <div className="bg-[#c8c2f0] rounded-lg p-2 mb-2 text-center">
+                      <div className="bg-gradient-to-r from-[#c8c2f0] to-[#a599e9] rounded-lg p-3 mb-3 text-center text-white shadow-md transition-transform hover:scale-[1.02]">
                         View Cart <ShoppingCart className="inline-block ml-1 h-4 w-4" />
                       </div>
-                      <div className="flex items-center mb-2">
-                        <div className="flex-1">Banana Bundle - Large Detected</div>
-                        <div className="h-6 w-6 bg-[#e0f7e0] rounded-full flex items-center justify-center">✓</div>
+                      <div className="flex items-center mb-3 bg-white/80 backdrop-blur-sm rounded-lg p-2 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md hover:bg-white/90 cursor-pointer">
+                        <div className="flex-1 text-gray-800 font-medium">Banana Bundle - Large Detected</div>
+                        <div className="h-6 w-6 bg-gradient-to-br from-[#e0f7e0] to-[#c8ecc8] rounded-full flex items-center justify-center shadow-sm transition-transform duration-300 hover:scale-110">
+                          <span className="text-green-700">✓</span>
+                        </div>
                       </div>
-                      <div className="flex-1 relative">
+                      <div className="flex-1 relative rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:-translate-y-1 group">
                         <Image
-                          src="/placeholder.svg?height=400&width=300"
-                          alt="Banana bundle"
+                          src="/20175355001_front_a06_@2.png"
+                          alt="Fresh yellow bananas bundled together, perfect for a healthy snack or smoothie. Each banana is uniformly ripe with a bright yellow peel."
+                          title="Fresh yellow bananas bundled together, perfect for a healthy snack or smoothie"
                           width={300}
                           height={400}
-                          className="object-cover rounded-lg"
+                          className="object-cover rounded-lg transform transition-transform duration-300 hover:brightness-105"
                         />
-                        <div className="absolute bottom-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-sm">
+                        <div className="absolute bottom-2 right-2 bg-black/60 text-white px-3 py-1.5 rounded-full text-sm backdrop-blur-sm">
                           scanning...
+                        </div>
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute inset-0 bg-black/75 flex items-center justify-center p-4 rounded-lg">
+                          <p className="text-white text-center text-sm">
+                            Yellow bananas bundled together. Each banana is uniformly ripe with a bright yellow peel.
+                          </p>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <div className="absolute bottom-1 inset-x-0 flex justify-center">
+                    <div className="h-1 w-16 bg-gray-800 rounded-full"></div>
+                  </div>
+                </div>
+                <div className="absolute -inset-x-2 -inset-y-6 z-0">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-gray-900 to-gray-800 opacity-20 blur-2xl"></div>
                 </div>
               </div>
             </div>
@@ -71,4 +88,3 @@ export default function Home() {
     </div>
   )
 }
-
