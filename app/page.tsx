@@ -148,7 +148,7 @@ const useTTS = () => {
     console.log(result);
 
     switch (result) {
-      case "check out":
+      case "go to check out":
         window.location.href = 'http://localhost:3000/checkout';
         break;
     }
