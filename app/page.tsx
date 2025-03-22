@@ -1,12 +1,30 @@
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { ShoppingCart } from "lucide-react"
-import Link from "next/link"
+"use client";
+
+import { useEffect } from "react";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { ShoppingCart } from "lucide-react";
+import Link from "next/link";
+import { ContrastToggle } from "@/components/ui/contrast-toggle";
+import "@/styles/contrast-styles.css";
 
 export default function Home() {
+  // Ensure contrast mode persists across page reloads
+  useEffect(() => {
+    const savedContrast = localStorage.getItem("highContrast");
+    if (savedContrast === "true") {
+      document.documentElement.classList.add("high-contrast");
+    }
+  }, []);
+
   return (
     <div className="min-h-screen">
       <section className="relative overflow-hidden bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c]">
+        {/* Contrast Toggle Button */}
+        <div className="absolute top-4 right-4 z-50">
+          <ContrastToggle />
+        </div>
+
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
@@ -37,12 +55,12 @@ export default function Home() {
                   </div>
                   <div className="aspect-[9/19] overflow-hidden bg-white">
                     <div className="p-4 flex flex-col h-full">
-                      <div className="bg-[#c8c2f0] rounded-lg p-2 mb-2 text-center">
+                    <div className="bg-[#c8c2f0] rounded-lg p-2 mb-2 text-center view-cart-button">
                         View Cart <ShoppingCart className="inline-block ml-1 h-4 w-4" />
                       </div>
                       <div className="flex items-center mb-2">
                         <div className="flex-1">Banana Bundle - Large Detected</div>
-                        <div className="h-6 w-6 bg-[#e0f7e0] rounded-full flex items-center justify-center">✓</div>
+                        <div className="h-6 w-6 bg-[#e0f7e0] rounded-full flex items-center justify-center checkmark-container">✓</div>
                       </div>
                       <div className="flex-1 relative">
                         <Image
@@ -61,10 +79,10 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
     </div>
-  )
+  );
 }
-
