@@ -2,17 +2,21 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
+import EnlargeButton from "@/components/ui/enlarge-button"
+import ReduceButton from "@/components/ui/reduce-button"
 
 export default function Home() {
   return (
     <div className="min-h-screen">
       <section className="relative overflow-hidden bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c]">
         <div className="container mx-auto px-4 py-16 md:py-24">
+          <EnlargeButton/> 
+          <br/><ReduceButton/>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
-              <h1 className="text-6xl font-bold tracking-tight">SmartCart</h1>
-              <h2 className="text-3xl font-medium">Shop Smarter, Checkout Faster!</h2>
-              <p className="text-lg max-w-md">
+              <h1 className="enlargeable text-6xl font-bold tracking-tight">SmartCart</h1>
+              <h2 className="enlargeable text-3xl font-medium">Shop Smarter, Checkout Faster!</h2>
+              <p className="enlargeable text-lg max-w-md">
                 SmartCart revolutionizes grocery shopping with AI-powered, accessible, and seamless checkout solutions —
                 making every trip faster, easier, and smarter for all.
               </p>
@@ -23,7 +27,7 @@ export default function Home() {
                 </Button>
               </Link>
             </div>
-
+    
             <div className="relative">
               <div className="relative mx-auto max-w-[300px]">
                 <div className="relative z-10 overflow-hidden rounded-[40px] border-8 border-black bg-black shadow-xl">

@@ -1,5 +1,7 @@
 import Image from "next/image"
 import { Bot } from "lucide-react"
+import EnlargeButton from "../../components/ui/enlarge-button"
+import ReduceButton from "../../components/ui/reduce-button"
 
 export default function Checkout() {
   return (
@@ -19,20 +21,22 @@ export default function Checkout() {
         </div>
 
         <div className="p-8">
-          <h1 className="text-4xl font-bold mb-8">Checkout</h1>
+          <EnlargeButton/> 
+          <br/><ReduceButton/>
+          <h1 className="enlargeable text-4xl font-bold mb-8">Checkout</h1>
 
           <div className="space-y-4">
             <div className="flex justify-between border-b pb-4">
-              <span className="text-xl">Honeycrisp Apple: 3</span>
-              <span className="text-xl">$0.99</span>
+              <span className="enlargeable text-xl">Honeycrisp Apple: 3</span>
+              <span className="enlargeable text-xl">$0.99</span>
             </div>
 
             <div className="flex justify-between border-b pb-4">
-              <span className="text-xl">Banana Bundle - Large: 1</span>
-              <span className="text-xl">$0.99</span>
+              <span className="enlargeable text-xl">Banana Bundle - Large: 1</span>
+              <span className="enlargeable text-xl">$0.99</span>
             </div>
 
-            <div className="flex justify-between pt-4 text-2xl font-bold">
+            <div className="enlargeable flex justify-between pt-4 text-2xl font-bold">
               <span>Total:</span>
               <span>$1.98</span>
             </div>
@@ -44,7 +48,7 @@ export default function Checkout() {
                 <Bot className="h-10 w-10" />
               </div>
               <div className="bg-gray-200 p-4 rounded-lg max-w-md">
-                <p className="text-lg">Hi! How can I help you today?</p>
+                <p className="enlargeable text-lg">Hi! How can I help you today?</p>
               </div>
             </div>
           </div>
