@@ -12,7 +12,19 @@ import FontSizeSlider from "@/components/ui/font-size-button";
 import { MagnifierToggle } from "@/components/ui/magnifier-toggle";
 
 export default function Home() {
-  // Custom hook for TTS functionality
+
+  const openPopup = useCallback(() => {
+    const popup = window.open(
+      '/for-kids.html', 
+      'for-kids', 
+      'width=600,height=400,scrollbars=yes,resizable=yes'
+    );
+  
+    if (!popup) {
+      console.error('Popup blocked by the browser');
+    }
+  }, []);
+    
 const useTTS = () => {
   const [isTTSEnabled, setIsTTSEnabled] = useState(false)
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
@@ -174,8 +186,19 @@ const useTTS = () => {
                   Go to Checkout
                 </Button>
               </Link>
-            </div>
 
+              <Button
+      className="enlargeable bg-gradient-to-r from-yellow-400 to-red-500 text-white px-12 py-4 text-xl rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"
+      onMouseEnter={() => speak("Let's Play with Me!")}
+      onMouseLeave={stopSpeaking}
+      onClick={openPopup}
+      aria-label="Play with Me Button"
+    >
+      Play with Me!
+    </Button>
+
+
+            </div>
             <div className="relative">
               <div className="relative mx-auto max-w-[300px]">
                 <div className="relative z-10 overflow-hidden rounded-[40px] border-[12px] border-black bg-black shadow-2xl ring-1 ring-gray-900/10">
@@ -230,7 +253,7 @@ const useTTS = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div>                 
                   <div className="absolute bottom-1 inset-x-0 flex justify-center">
                     <div className="h-1 w-16 bg-gray-800 rounded-full"></div>
                   </div>
@@ -242,7 +265,7 @@ const useTTS = () => {
             </div>
 
           </div>
-        </div>
+        </div>     
       </section>
     </div>
   );
