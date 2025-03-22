@@ -73,6 +73,8 @@ export default function Home() {
     const savedContrast = localStorage.getItem("highContrast");
     if (savedContrast === "true") {
       document.documentElement.classList.add("high-contrast");
+    } else {
+      document.documentElement.classList.remove("high-contrast");
     }
   }, []);
 
@@ -166,7 +168,7 @@ export default function Home() {
                       <div className="h-2 w-2 rounded-full bg-gray-700"></div>
                     </div>
                   </div>
-                  <div className="aspect-[9/19] overflow-hidden bg-gradient-to-b from-gray-50 to-white phone-bg">
+                  <div className="aspect-[9/19] overflow-hidden bg-gradient-to-b from-gray-50 to-white phone-bg ">
                     <div className="p-4 flex flex-col h-full">
                       <div 
                         className="enlargeable bg-gradient-to-r from-[#c8c2f0] to-[#a599e9] rounded-lg p-3 mb-3 text-center text-white shadow-md transition-transform hover:scale-[1.02]"
