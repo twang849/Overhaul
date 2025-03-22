@@ -389,14 +389,6 @@ html.high-contrast .bg-\[\#5c5a7c\]:hover {
   border: none !important;
 }
 
-/* Ensure buttons don't overlap */
-:root.high-contrast .p-8 {
-  display: flex;
-  gap: 1rem;
-  align-items: start;
-  flex-wrap: wrap;
-}
-
 /* Position controls consistently */
 :root.high-contrast button[aria-label="Adjust font size"],
 :root.high-contrast button[aria-label="Enable high contrast"],
