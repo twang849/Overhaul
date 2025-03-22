@@ -20,13 +20,12 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <section className="relative overflow-hidden bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c]">
-        {/* Contrast Toggle Button */}
         <div className="absolute top-4 right-4 z-50">
           <ContrastToggle />
         </div>
 
         <div className="container mx-auto px-4 py-16 md:py-24">
-          <FontSizeButton/>
+          {/* <FontSizeButton/> */}
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
               <h1 className="enlargeable text-6xl font-bold tracking-tight">SmartCart</h1>
