@@ -4,6 +4,7 @@ import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import "@/styles/magnifier.css"; 
 import { useState, useCallback, useRef, useEffect } from "react"
 import { Switch } from "@/components/ui/switch"
 import FontSizeButton from "@/components/ui/font-size-button"
@@ -119,7 +120,7 @@ export default function Home() {
                 SmartCart revolutionizes grocery shopping with AI-powered, accessible, and seamless checkout solutions —
                 making every trip faster, easier, and smarter for all.
               </p>
-              <Button 
+              <Button id="magnify"
                 className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 py-6 text-lg"
                 onMouseEnter={() => handleMouseEnter("Download SmartCart")}
                 onMouseLeave={handleMouseLeave}
