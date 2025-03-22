@@ -1,13 +1,14 @@
 "use client"
-
 import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import "@/styles/magnifier.css"; 
-import { useState, useCallback, useRef, useEffect } from "react"
-import { Switch } from "@/components/ui/switch"
-import FontSizeButton from "@/components/ui/font-size-button"
+import { useState, useCallback, useRef, useEffect } from "react";
+import { Switch } from "@/components/ui/switch";
+import { ContrastToggle } from "@/components/ui/contrast-toggle";
+import "@/styles/contrast-styles.css";
+import FontSizeSlider from "@/components/ui/font-size-button";
 
 // Custom hook for TTS functionality
 const useTTS = () => {
@@ -74,6 +75,11 @@ export default function Home() {
     script.async = true;
     document.body.appendChild(script);
 
+    const savedContrast = localStorage.getItem("highContrast");
+    if (savedContrast === "true") {
+      document.documentElement.classList.add("high-contrast");
+    }
+
     return () => {
       // Cleanup the script when the component unmounts
       document.body.removeChild(script);
@@ -94,6 +100,9 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <section className="relative overflow-hidden bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c]">
+        <div className="absolute top-4 right-4 z-50">
+          <ContrastToggle />
+        </div>
         <div className="container mx-auto px-4 py-16 md:py-24">
           {/* Accessibility Controls */}
           <div className="absolute top-4 right-4 flex items-center space-x-4">
@@ -173,12 +182,12 @@ export default function Home() {
                       <div className="h-2 w-2 rounded-full bg-gray-700"></div>
                     </div>
                   </div>
-                  <div className="aspect-[9/19] overflow-hidden bg-gradient-to-b from-gray-50 to-white">
+                  <div className="aspect-[9/19] overflow-hidden bg-gradient-to-b from-gray-50 to-white phone-bg">
                     <div className="p-4 flex flex-col h-full">
                       <div 
                         className="enlargeable bg-gradient-to-r from-[#c8c2f0] to-[#a599e9] rounded-lg p-3 mb-3 text-center text-white shadow-md transition-transform hover:scale-[1.02]"
-                        onMouseEnter={() => handleMouseEnter("View Cart")}
-                        onMouseLeave={handleMouseLeave}
+                        onMouseEnter={() => speak("View Cart")}
+                        onMouseLeave={stopSpeaking}
                       >
                         View Cart <ShoppingCart className="inline-block ml-1 h-4 w-4" />
                       </div>
@@ -223,9 +232,10 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
     </div>
-  )
+  );
 }

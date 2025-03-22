@@ -1,0 +1,162 @@
+/* High Contrast Mode Styles */
+:root.high-contrast {
+    --background: #000000;
+    --foreground: #ffffff;
+    --primary: #ffff00;
+    --secondary: #00ffff;
+    --border: #ffffff;
+    --input: #ffffff;
+    --ring: #ffff00;
+  }
+  
+  /* Override background in high contrast mode */
+  :root.high-contrast .bg-gradient-to-br {
+    background: #000000 !important;
+  }
+  
+  /* Text colors in high contrast mode */
+  :root.high-contrast h1,
+  :root.high-contrast h2,
+  :root.high-contrast p {
+    color: #ffffff !important;
+  }
+  
+  /* Button styling in high contrast mode */
+  :root.high-contrast button {
+    background-color: #ffff00 !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+  
+  /* Link buttons in high contrast mode */
+  :root.high-contrast a button {
+    background-color: #000000 !important;
+    color: #ffff00 !important;
+    border: 2px solid #ffff00 !important;
+  }
+  
+  /* Make sure the contrast toggle button itself is always visible */
+  button[aria-label="Enable high contrast"],
+  button[aria-label="Disable high contrast"] {
+    background-color: #ffffff !important;
+    border: 2px solid #000000 !important;
+    color: #000000 !important;
+    position: relative;
+    z-index: 100;
+  }
+  
+  /* High contrast toggle button when high contrast is enabled */
+  :root.high-contrast button[aria-label="Disable high contrast"] {
+    background-color: #000000 !important;
+    border: 2px solid #ffffff !important;
+    color: #ffffff !important;
+  }
+  
+  /* Contrast toggle icon colors */
+  button[aria-label="Enable high contrast"] svg,
+  button[aria-label="Disable high contrast"] svg {
+    color: #000000 !important;
+  }
+  
+  :root.high-contrast button[aria-label="Disable high contrast"] svg {
+    color: #ffffff !important;
+  }
+  
+  /* Phone mockup styles for high contrast mode - BLACK BACKGROUND WITH WHITE TEXT */
+  :root.high-contrast .rounded-\[40px\] {
+    border-color: #ffffff !important;
+    background-color: #000000 !important;
+  }
+  
+  :root.high-contrast .rounded-t-\[24px\] {
+    background-color: #000000 !important;
+  }
+  
+  :root.high-contrast .rounded-b-3xl {
+    background-color: #000000 !important;
+  }
+  
+  :root.high-contrast .rounded-full.bg-gray-500 {
+    background-color: #000000 !important;
+  }
+  
+  :root.high-contrast .aspect-\[9\/19\] {
+    background-color: #000000 !important;
+  }
+  
+  /* All text within the phone should be white */
+  :root.high-contrast .aspect-\[9\/19\] div {
+    color: #ffffff !important;
+  }
+  
+  :root.high-contrast .bg-\[#c8c2f0\] {
+    background-color: #000000 !important;
+    color: #000000 !important;
+    border: 1px solid #000000 !important;
+  }
+  
+  :root.high-contrast .bg-\[#e0f7e0\] {
+    background-color: #000000 !important;
+    color: #000000 !important;
+    border: 1px solid #ffffff !important;
+  }
+  
+  :root.high-contrast .absolute.bottom-2.right-2 {
+    background-color: #000000 !important;
+    border: 1px solid #ffffff !important;
+  }
+  
+  
+  :root.high-contrast .flex.items-center.justify-center {
+    color: #000000 !important;
+  }
+
+  :root.high-contrast header {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #ffffff !important;
+  }
+
+  :root.high-contrast header nav a {
+    color: #ffffff !important;
+    text-decoration: none;
+  }
+  
+  :root.high-contrast header nav a:hover {
+    color: #ffff00 !important;
+    text-decoration: underline !important;
+  }
+
+  :root.high-contrast .checkmark-container {
+    background-color: #29ff54 !important;
+    color: #27ff2b !important;
+  }
+
+  :root.high-contrast [class*="text-black"] {
+    color: #000000 !important;
+  }
+  
+  :root.high-contrast [class*="hover\\:text-gray-700"]:hover {
+    color: #ffff00 !important;
+  }
+
+  :root.high-contrast .view-cart-button {
+    background-color: #000000 !important;
+    color: #000000 !important;
+    border: 1px solid #ffffff !important;
+  }
+  
+  :root.high-contrast .view-cart-button svg {
+    color: #ffffff !important;
+  }
+
+  :root.high-contrast .purple-bg {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  :root.high-contrast .phone-bg {
+    background-color: #000000 !important;
+    color: #000000 !important;
+  }
+
