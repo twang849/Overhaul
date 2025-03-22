@@ -1,12 +1,13 @@
 "use client"
-
+import { useEffect } from "react";
 import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { useState, useCallback } from "react"
-import { Switch } from "@/components/ui/switch"
-import FontSizeButton from "@/components/ui/font-size-button"
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { useState, useCallback } from "react";
+import { Switch } from "@/components/ui/switch";
+import { ContrastToggle } from "@/components/ui/contrast-toggle";
+import "@/styles/contrast-styles.css";
 
 // Custom hook for TTS functionality
 const useTTS = () => {
@@ -51,16 +52,28 @@ const useTTS = () => {
 }
 
 export default function Home() {
+  // Ensure contrast mode persists across page reloads
+  useEffect(() => {
+    const savedContrast = localStorage.getItem("highContrast");
+    if (savedContrast === "true") {
+      document.documentElement.classList.add("high-contrast");
+    }
+  }, []);
+
   // Initialize TTS hook
   const { isTTSEnabled, setIsTTSEnabled, speak, stopSpeaking } = useTTS()
 
   return (
     <div className="min-h-screen">
       <section className="relative overflow-hidden bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c]">
+        <div className="absolute top-4 right-4 z-50">
+          <ContrastToggle />
+        </div>
+
         <div className="container mx-auto px-4 py-16 md:py-24">
           {/* Accessibility Controls */}
           <div className="absolute top-4 right-4 flex items-center space-x-4">
-            <FontSizeButton />
+            {/* <FontSizeButton /> */}
             <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
               <span className="text-sm text-white">Text-to-Speech</span>
               <Switch
@@ -130,8 +143,8 @@ export default function Home() {
                   </div>
                   <div className="aspect-[9/19] overflow-hidden bg-gradient-to-b from-gray-50 to-white">
                     <div className="p-4 flex flex-col h-full">
-                      <div 
-                        className="enlargeable bg-gradient-to-r from-[#c8c2f0] to-[#a599e9] rounded-lg p-3 mb-3 text-center text-white shadow-md transition-transform hover:scale-[1.02]"
+                    <div 
+                        className="enlargeable bg-[#c8c2f0] rounded-lg p-2 mb-2 text-center view-cart-button"
                         onMouseEnter={() => speak("View Cart")}
                         onMouseLeave={stopSpeaking}
                       >
@@ -178,9 +191,10 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
     </div>
-  )
+  );
 }
