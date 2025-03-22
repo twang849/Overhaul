@@ -9,7 +9,7 @@ import { Switch } from "@/components/ui/switch";
 import { ContrastToggle } from "@/components/ui/contrast-toggle";
 import "@/styles/contrast-styles.css";
 import FontSizeSlider from "@/components/ui/font-size-button";
-
+import { MagnifierToggle } from "@/components/ui/magnifier-toggle";
 
 export default function Home() {
   // Custom hook for TTS functionality
@@ -111,6 +111,7 @@ const useTTS = () => {
             onMouseLeave={handleMouseLeave}
           >
             <ContrastToggle />
+            <MagnifierToggle/>
           </div>
             <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2"
               onMouseEnter={() => handleMouseEnter("Toggle Text-to-Speech")}
