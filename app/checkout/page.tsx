@@ -1,12 +1,79 @@
 "use client"
-import { useEffect } from "react";
 import Image from "next/image"
 import { Bot } from "lucide-react"
 import FontSizeButton from "../../components/ui/font-size-button"
 import { ContrastToggle } from "@/components/ui/contrast-toggle";
 import "@/styles/contrast-styles.css";
+import { useState, useCallback, useRef, useEffect } from "react";
 
 export default function Checkout() {
+  const useTTS = () => {
+    const [isTTSEnabled, setIsTTSEnabled] = useState(false)
+    const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
+  
+    // Initialize speech synthesis
+    const speak = useCallback((text: string) => {
+      if (!isTTSEnabled) return
+  
+      // Check browser compatibility
+      if (!('speechSynthesis' in window)) {
+        console.warn('Text-to-speech not supported in this browser')
+        return
+      }
+  
+      // Cancel any ongoing speech
+      stopSpeaking()
+  
+      // Create and configure utterance
+      const utterance = new SpeechSynthesisUtterance(text)
+      utterance.rate = 1.0
+      utterance.pitch = 1.0
+      utterance.volume = 1.0
+  
+      // Store reference to current utterance
+      utteranceRef.current = utterance
+  
+      // Speak the text
+      window.speechSynthesis.speak(utterance)
+    }, [isTTSEnabled])
+  
+    // Function to stop speech
+    const stopSpeaking = useCallback(() => {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel()
+        utteranceRef.current = null
+      }
+    }, [])
+  
+    // Cleanup function to stop speech when component unmounts
+    // or when TTS is disabled
+    useEffect(() => {
+      return () => {
+        if (!isTTSEnabled) {
+          stopSpeaking()
+        }
+      }
+    }, [isTTSEnabled, stopSpeaking])
+  
+    return {
+      isTTSEnabled,
+      setIsTTSEnabled,
+      speak,
+      stopSpeaking
+    }
+  }
+    
+    // Initialize TTS hook
+    const { isTTSEnabled, setIsTTSEnabled, speak, stopSpeaking } = useTTS()
+  
+    // Memoized hover handlers for better performance
+    const handleMouseEnter = useCallback((text: string) => {
+      speak(text)
+    }, [speak])
+  
+    const handleMouseLeave = useCallback(() => {
+      stopSpeaking()
+    }, [stopSpeaking])
   
   useEffect(() => {
       const savedContrast = localStorage.getItem("highContrast");
