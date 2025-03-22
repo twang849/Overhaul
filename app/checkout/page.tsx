@@ -6,6 +6,17 @@ import FontSizeButton from "../../components/ui/font-size-button"
 import { ContrastToggle } from "@/components/ui/contrast-toggle";
 import "@/styles/contrast-styles.css";
 import { useState, useCallback, useRef, useEffect } from "react";
+
+declare global {
+  interface Window {
+    SpeechRecognition: any;
+    webkitSpeechRecognition: any;
+    SpeechGrammarList: any;
+    webkitSpeechGrammarList: any;
+    SpeechRecognitionEvent: any;
+    webkitSpeechRecognitionEvent: any;
+  }
+}
 export default function Checkout() { 
   const openCounterWindow = () => {
       // Open the new HTML file in a new window
@@ -86,7 +97,57 @@ export default function Checkout() {
         document.documentElement.classList.add("high-contrast");
       }
     }, []);
+
+   useEffect (() => {
+      if (typeof window != undefined) {
+    const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SpeechGrammarList =
+      window.SpeechGrammarList || window.webkitSpeechGrammarList;
+    const SpeechRecognitionEvent =
+      window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
+  
+      const commands = [
+        "go to home",
+        "go to check out"
+      ];
+      const grammar = `#JSGF V1.0; grammar colors; public <command> = ${commands.join(
+        " | ",
+      )};`;    
+  
+    const recognition = new SpeechRecognition();
+    const speechRecognitionList = new SpeechGrammarList();  
     
+    speechRecognitionList.addFromString(grammar);
+  
+    recognition.grammars = speechRecognitionList;
+    recognition.continuous= true;
+  
+    document.body.onclick = () => {
+      try {
+        recognition.start();
+      } catch (Exception) {
+        console.log("Recognition already started.")
+      }
+      console.log("Ready to receive a command.");
+    };
+  
+    recognition.onresult = (event: any) => {
+      let result: String = event.results[0][0].transcript;
+      console.log(result);
+  
+      switch (result) {
+        case "go to home":
+          window.location.href = 'http://localhost:3000/';
+          break;
+      }
+    }
+  
+    recognition.onnomatch = (event: any) => {
+      console.log("Unrecognized command.")
+    }
+  }
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trivia Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    .question {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 20px;
+      padding: 15px 30px;
+      margin: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .result {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Trivia Quiz</h1>
+  <div class="question" id="question"></div>
+  <div id="answers"></div>
+  <div id="result" class="result"></div>
+  
+  <script>
+    let questionIndex = 0;
+    let correctAnswer = '';
+    let triviaQuestions = [];
+
+    // Fetch trivia questions from the API
+    fetch('https://opentdb.com/api.php?amount=10&category=9&difficulty=easy')
+      .then(response => response.json())
+      .then(data => {
+        triviaQuestions = data.results;
+        loadQuestion();
+      })
+      .catch(error => {
+        console.error('Error fetching trivia questions:', error);
+        document.getElementById('result').textContent = 'Failed to load questions.';
+      });
+
+    function loadQuestion() {
+      if (questionIndex >= triviaQuestions.length) {
+        document.getElementById('result').textContent = 'Quiz Over!';
+        document.getElementById('answers').innerHTML = '<button onclick="restartGame()">Play Again</button>';
+        return;
+      }
+
+      const questionData = triviaQuestions[questionIndex];
+      document.getElementById('question').textContent = questionData.question;
+      const answersDiv = document.getElementById('answers');
+      answersDiv.innerHTML = '';
+
+      // All options (correct + incorrect) combined
+      const options = [...questionData.incorrect_answers, questionData.correct_answer];
+      shuffle(options);
+
+      options.forEach(option => {
+        const button = document.createElement('button');
+        button.textContent = option;
+        button.onclick = () => checkAnswer(option);
+        answersDiv.appendChild(button);
+      });
+
+      correctAnswer = questionData.correct_answer;
+    }
+
+    function checkAnswer(selected) {
+      const questionData = triviaQuestions[questionIndex];
+      if (selected === questionData.correct_answer) {
+        document.getElementById('result').textContent = 'Correct! Well done.';
+      } else {
+        document.getElementById('result').textContent = 'Oops! Try again.';
+      }
+
+      questionIndex++;
+      setTimeout(loadQuestion, 1000); // Load next question after 1 second
+    }
+
+    function restartGame() {
+      questionIndex = 0;
+      document.getElementById('result').textContent = '';
+      loadQuestion();
+    }
+
+    // Shuffle array function to randomize the answer options
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+  </script>
+</body>
+</html>

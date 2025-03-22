@@ -12,7 +12,19 @@ import FontSizeSlider from "@/components/ui/font-size-button";
 import { MagnifierToggle } from "@/components/ui/magnifier-toggle";
 
 export default function Home() {
-  // Custom hook for TTS functionality
+
+  const openPopup = useCallback(() => {
+    const popup = window.open(
+      '/for-kids.html', 
+      'for-kids', 
+      'width=600,height=400,scrollbars=yes,resizable=yes'
+    );
+  
+    if (!popup) {
+      console.error('Popup blocked by the browser');
+    }
+  }, []);
+    
 const useTTS = () => {
   const [isTTSEnabled, setIsTTSEnabled] = useState(false)
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
@@ -98,6 +110,57 @@ const useTTS = () => {
     };
   }, []);
 
+  useEffect (() => {
+    if (typeof window != undefined) {
+  const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+  const SpeechGrammarList =
+    window.SpeechGrammarList || window.webkitSpeechGrammarList;
+  const SpeechRecognitionEvent =
+    window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
+
+    const commands = [
+      "go to home",
+      "go to checkout"
+    ];
+    const grammar = `#JSGF V1.0; grammar colors; public <command> = ${commands.join(
+      " | ",
+    )};`;    
+
+  const recognition = new SpeechRecognition();
+  const speechRecognitionList = new SpeechGrammarList();  
+  
+  speechRecognitionList.addFromString(grammar);
+
+  recognition.grammars = speechRecognitionList;
+  recognition.continuous= true;
+
+  document.body.onclick = () => {
+    try {
+      recognition.start();
+    } catch (Exception) {
+      console.log("Recognition already started.")
+    }
+    console.log("Ready to receive a command.");
+  };
+
+  recognition.onresult = (event: any) => {
+    let result: String = event.results[0][0].transcript;
+    console.log(result);
+
+    switch (result) {
+      case "go to check out":
+        window.location.href = 'http://localhost:3000/checkout';
+        break;
+    }
+  }
+
+  recognition.onnomatch = (event: any) => {
+    console.log("Unrecognized command.")
+  }
+}
+}, []);
+
   return (
     <div className="min-h-screen">
       <section className="relative overflow-hidden bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c]">
@@ -139,6 +202,7 @@ const useTTS = () => {
                 className="enlargeable text-6xl font-bold tracking-tight"
                 onMouseEnter={() => handleMouseEnter("SmartCart")}
                 onMouseLeave={handleMouseLeave}
+                style = {{fontSize: '30px'}}
               >
                 SmartCart
               </h1>
@@ -174,8 +238,19 @@ const useTTS = () => {
                   Go to Checkout
                 </Button>
               </Link>
-            </div>
 
+              <Button
+      className="enlargeable bg-gradient-to-r from-yellow-400 to-red-500 text-white px-12 py-4 text-xl rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"
+      onMouseEnter={() => speak("Let's Play with Me!")}
+      onMouseLeave={stopSpeaking}
+      onClick={openPopup}
+      aria-label="Play with Me Button"
+    >
+      Play with Me!
+    </Button>
+
+
+            </div>
             <div className="relative">
               <div className="relative mx-auto max-w-[300px]">
                 <div className="relative z-10 overflow-hidden rounded-[40px] border-[12px] border-black bg-black shadow-2xl ring-1 ring-gray-900/10">
@@ -230,7 +305,7 @@ const useTTS = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div>                 
                   <div className="absolute bottom-1 inset-x-0 flex justify-center">
                     <div className="h-1 w-16 bg-gray-800 rounded-full"></div>
                   </div>
@@ -242,7 +317,7 @@ const useTTS = () => {
             </div>
 
           </div>
-        </div>
+        </div>     
       </section>
     </div>
   );
