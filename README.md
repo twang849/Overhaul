@@ -1,4 +1,4 @@
-#Download OpenCV
+# Download OpenCV
 pip install opencv-python
 
 # Download yolov3.weights
