@@ -1,9 +1,9 @@
 //defaults - not recommended to change
 
-const SCALE = 1.3; //magnification
-const SIZE = 150; // diameter
-const LENSE_OFFSET_X = SIZE / 10.2;
-const LENSE_OFFSET_Y = SIZE / 10.2;
+SCALE = 1.3; //magnification
+SIZE = 150; // diameter
+LENSE_OFFSET_X = SIZE / 10.2;
+LENSE_OFFSET_Y = SIZE / 10.2;
 
 document.documentElement.style.setProperty("--scale", SCALE);
 document.documentElement.style.setProperty("--size", SIZE + "px");

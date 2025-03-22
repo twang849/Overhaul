@@ -11,6 +11,17 @@ import "@/styles/contrast-styles.css";
 import FontSizeSlider from "@/components/ui/font-size-button";
 import { MagnifierToggle } from "@/components/ui/magnifier-toggle";
 
+interface CustomWindow extends Window {
+  SpeechRecognition: any;
+  webkitSpeechRecognition: any;
+  SpeechGrammarList: any;
+  webkitSpeechGrammarList: any;
+  SpeechRecognitionEvent: any;
+  webkitSpeechRecognitionEvent: any;
+}
+
+declare let window: CustomWindow;
+
 export default function Home() {
   // Custom hook for TTS functionality
 const useTTS = () => {
@@ -83,7 +94,7 @@ const useTTS = () => {
   useEffect(() => {
     // Create a script element
     const script = document.createElement('script');
-    script.src = './magnifier.js'; // Adjust the path as needed
+    script.src = 'magnifier.js'; // Adjust the path as needed
     script.async = true;
     document.body.appendChild(script);
   
@@ -98,6 +109,57 @@ const useTTS = () => {
     };
   }, []);
 
+  useEffect (() => {
+    if (typeof window != undefined) {
+  const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+  const SpeechGrammarList =
+    window.SpeechGrammarList || window.webkitSpeechGrammarList;
+  const SpeechRecognitionEvent =
+    window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
+
+    const commands = [
+      "go to home",
+      "go to checkout"
+    ];
+    const grammar = `#JSGF V1.0; grammar colors; public <command> = ${commands.join(
+      " | ",
+    )};`;    
+
+  const recognition = new SpeechRecognition();
+  const speechRecognitionList = new SpeechGrammarList();  
+  
+  speechRecognitionList.addFromString(grammar);
+
+  recognition.grammars = speechRecognitionList;
+  recognition.continuous= true;
+
+  document.body.onclick = () => {
+    try {
+      recognition.start();
+    } catch (Exception) {
+      console.log("Recognition already started.")
+    }
+    console.log("Ready to receive a command.");
+  };
+
+  recognition.onresult = (event: any) => {
+    let result: String = event.results[0][0].transcript;
+    console.log(result);
+
+    switch (result) {
+      case "check out":
+        window.location.href = 'http://localhost:3000/checkout';
+        break;
+    }
+  }
+
+  recognition.onnomatch = (event: any) => {
+    console.log("Unrecognized command.")
+  }
+}
+}, []);
+
   return (
     <div className="min-h-screen">
       <section className="relative overflow-hidden bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c]">
@@ -111,13 +173,18 @@ const useTTS = () => {
             onMouseLeave={handleMouseLeave}
           >
             <ContrastToggle />
-            <MagnifierToggle/>
+            <div 
+              onMouseEnter={() => handleMouseEnter("Magnifying Mode")}
+              onMouseLeave={handleMouseLeave}
+            >
+              <MagnifierToggle/>
+            </div>
           </div>
             <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2"
               onMouseEnter={() => handleMouseEnter("Toggle Text-to-Speech")}
               onMouseLeave={handleMouseLeave}
             >
-              <span className="enlargeable text-sm text-white">Text-to-Speech</span>
+              <span className="enlargeable text-sm text-black">Text-to-Speech</span>
               <Switch
                 checked={isTTSEnabled}
                 onCheckedChange={() => setIsTTSEnabled(!isTTSEnabled)}
@@ -212,7 +279,7 @@ const useTTS = () => {
                       </div>
                       <div className="flex-1 relative rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:-translate-y-1 group">
                         <Image
-                          src="./bananas.png"
+                          src="/bananas.png"
                           alt="Fresh yellow bananas bundled together, perfect for a healthy snack or smoothie. Each banana is uniformly ripe with a bright yellow peel."
                           title="Fresh yellow bananas bundled together, perfect for a healthy snack or smoothie"
                           width={300}
