@@ -1,3 +1,6 @@
+# Download OpenCV
+pip install opencv-python
+
 # Download yolov3.weights
 curl -O https://pjreddie.com/media/files/yolov3.weights
 
