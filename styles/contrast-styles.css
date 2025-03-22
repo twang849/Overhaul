@@ -1,3 +1,10 @@
+:root {
+  --text-color: #000000;
+  --background-color: #ffffff;
+  --button-bg: #5c5a7c;
+  --button-hover: #4a4865;
+}
+
 /* High Contrast Mode Styles */
 :root.high-contrast {
     --background: #000000;
@@ -81,31 +88,30 @@
   }
   
   :root.high-contrast .aspect-\[9\/19\] {
-    background-color: #000000 !important;
+    background-color: #ffffff !important; /* Change to white background */
   }
   
-  /* All text within the phone should be white */
   :root.high-contrast .aspect-\[9\/19\] div {
-    color: #ffffff !important;
+    color: #000000 !important; /* Keep text black */
   }
   
   :root.high-contrast .bg-\[#c8c2f0\] {
-    background-color: #000000 !important;
+    background-color: #ffffff !important; /* Change to white */
     color: #000000 !important;
     border: 1px solid #000000 !important;
   }
   
   :root.high-contrast .bg-\[#e0f7e0\] {
-    background-color: #000000 !important;
+    background-color: #ffffff !important; /* Change to white */
     color: #000000 !important;
-    border: 1px solid #ffffff !important;
+    border: 1px solid #000000 !important;
   }
   
   :root.high-contrast .absolute.bottom-2.right-2 {
     background-color: #000000 !important;
+    color: #ffffff !important; /* Make "scanning..." text white */
     border: 1px solid #ffffff !important;
   }
-  
   
   :root.high-contrast .flex.items-center.justify-center {
     color: #000000 !important;
@@ -117,14 +123,20 @@
     border-bottom: 2px solid #ffffff !important;
   }
 
-  :root.high-contrast header nav a {
+  :root.high-contrast header nav a,
+  :root.high-contrast header .text-black {
     color: #ffffff !important;
     text-decoration: none;
   }
-  
-  :root.high-contrast header nav a:hover {
+
+  :root.high-contrast header nav a:hover,
+  :root.high-contrast header .text-black:hover {
     color: #ffff00 !important;
     text-decoration: underline !important;
+  }
+
+  :root.high-contrast header [class*="text-black"] {
+    color: #ffffff !important;
   }
 
   :root.high-contrast .checkmark-container {
@@ -156,7 +168,93 @@
   }
 
   :root.high-contrast .phone-bg {
-    background-color: #000000 !important;
+    background-color: #ffffff !important;
     color: #000000 !important;
   }
+
+  :root.high-contrast .bg-white\/80 {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+/* Checkout page specific styles for high contrast mode */
+:root.high-contrast .checkout-page {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+:root.high-contrast .checkout-container {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+:root.high-contrast .checkout-form input,
+:root.high-contrast .checkout-form select {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+:root.high-contrast .checkout-form label {
+  color: #ffffff !important;
+}
+
+:root.high-contrast .order-summary {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+:root.high-contrast .order-item {
+  border-bottom: 1px solid #ffffff !important;
+}
+
+:root.high-contrast .price-details {
+  color: #ffffff !important;
+}
+
+:root.high-contrast .checkout-button {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+:root.high-contrast .checkout-button:hover {
+  background-color: #e6e600 !important;
+}
+
+html.high-contrast {
+  --text-color: #ffffff;
+  --background-color: #000000;
+  --button-bg: #ffff00;
+  --button-hover: #e6e600;
+}
+
+html.high-contrast .bg-gradient-to-br {
+  background: var(--background-color) !important;
+}
+
+html.high-contrast h1,
+html.high-contrast h2,
+html.high-contrast p {
+  color: var(--text-color) !important;
+}
+
+html.high-contrast .bg-white\/10 {
+  background-color: var(--text-color) !important;
+}
+
+html.high-contrast .text-white {
+  color: var(--background-color) !important;
+}
+
+html.high-contrast .bg-\[\#5c5a7c\] {
+  background-color: var(--button-bg) !important;
+  color: var(--background-color) !important;
+}
+
+html.high-contrast .bg-\[\#5c5a7c\]:hover {
+  background-color: var(--button-hover) !important;
+}
 
