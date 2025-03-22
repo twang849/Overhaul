@@ -84,14 +84,22 @@ export default function Home() {
         <div className="container mx-auto px-4 py-16 md:py-24">
           {/* Accessibility Controls */}
           <div className="absolute top-4 right-4 flex items-center space-x-4">
-            <FontSizeButton />
-            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2"
+              onMouseEnter={() => handleMouseEnter("Enable or disable Text-to-Speech")}
+              onMouseLeave={handleMouseLeave}
+            >
               <span className="enlargeable text-sm text-white">Text-to-Speech</span>
               <Switch
                 checked={isTTSEnabled}
                 onCheckedChange={() => setIsTTSEnabled(!isTTSEnabled)}
                 aria-label="Toggle text-to-speech"
               />
+            </div>
+            <div 
+              onMouseEnter={() => handleMouseEnter("Adjust Font Size")}
+              onMouseLeave={handleMouseLeave}
+            >
+              <FontSizeButton />
             </div>
           </div>
 
