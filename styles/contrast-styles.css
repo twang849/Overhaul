@@ -77,7 +77,7 @@
   }
   
   :root.high-contrast .rounded-full.bg-gray-500 {
-    background-color: #ffffff !important;
+    background-color: #000000 !important;
   }
   
   :root.high-contrast .aspect-\[9\/19\] {
@@ -91,13 +91,13 @@
   
   :root.high-contrast .bg-\[#c8c2f0\] {
     background-color: #000000 !important;
-    color: #ffffff !important;
-    border: 1px solid #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #000000 !important;
   }
   
   :root.high-contrast .bg-\[#e0f7e0\] {
     background-color: #000000 !important;
-    color: #ffffff !important;
+    color: #000000 !important;
     border: 1px solid #ffffff !important;
   }
   
@@ -133,7 +133,7 @@
   }
 
   :root.high-contrast [class*="text-black"] {
-    color: #ffffff !important;
+    color: #000000 !important;
   }
   
   :root.high-contrast [class*="hover\\:text-gray-700"]:hover {
@@ -148,5 +148,15 @@
   
   :root.high-contrast .view-cart-button svg {
     color: #ffffff !important;
+  }
+
+  :root.high-contrast .purple-bg {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  :root.high-contrast .phone-bg {
+    background-color: #000000 !important;
+    color: #000000 !important;
   }
 

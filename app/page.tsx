@@ -8,6 +8,7 @@ import { useState, useCallback } from "react";
 import { Switch } from "@/components/ui/switch";
 import { ContrastToggle } from "@/components/ui/contrast-toggle";
 import "@/styles/contrast-styles.css";
+import FontSizeSlider from "@/components/ui/font-size-button";
 
 // Custom hook for TTS functionality
 const useTTS = () => {
@@ -69,11 +70,11 @@ export default function Home() {
         <div className="absolute top-4 right-4 z-50">
           <ContrastToggle />
         </div>
-
         <div className="container mx-auto px-4 py-16 md:py-24">
           {/* Accessibility Controls */}
           <div className="absolute top-4 right-4 flex items-center space-x-4">
             {/* <FontSizeButton /> */}
+            <FontSizeSlider/>
             <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
               <span className="text-sm text-white">Text-to-Speech</span>
               <Switch
@@ -141,7 +142,7 @@ export default function Home() {
                       <div className="h-2 w-2 rounded-full bg-gray-700"></div>
                     </div>
                   </div>
-                  <div className="aspect-[9/19] overflow-hidden bg-gradient-to-b from-gray-50 to-white">
+                  <div className="aspect-[9/19] overflow-hidden bg-gradient-to-b from-gray-50 to-white phone-bg">
                     <div className="p-4 flex flex-col h-full">
                     <div 
                         className="enlargeable bg-[#c8c2f0] rounded-lg p-2 mb-2 text-center view-cart-button"
