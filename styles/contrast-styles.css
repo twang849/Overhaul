@@ -258,3 +258,177 @@ html.high-contrast .bg-\[\#5c5a7c\]:hover {
   background-color: var(--button-hover) !important;
 }
 
+/* Checkout page specific styles */
+:root.high-contrast .bg-\[#5c5a7c\] {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+:root.high-contrast .bg-white\/20 {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+:root.high-contrast .bg-gray-200 {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+:root.high-contrast .bg-white {
+  background-color: #000000 !important;
+}
+
+:root.high-contrast .border-b {
+  border-color: #ffffff !important;
+}
+
+:root.high-contrast .text-xl,
+:root.high-contrast .text-2xl,
+:root.high-contrast .text-4xl,
+:root.high-contrast .text-lg {
+  color: #ffffff !important;
+}
+
+:root.high-contrast .bg-white.p-2 {
+  background-color: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+:root.high-contrast .Bot {
+  color: #ffffff !important;
+}
+
+/* Checkout page grid border separation */
+:root.high-contrast .grid.md\:grid-cols-2 {
+  border: 1px solid #ffffff !important;
+}
+
+:root.high-contrast .grid.md\:grid-cols-2 > div:first-child {
+  border-right: 2px solid #ffffff !important;
+}
+
+/* Ensure the existing styles remain consistent */
+:root.high-contrast .bg-\[#5c5a7c\] {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Fix font size adjustment and bot logo visibility */
+:root.high-contrast .Bot {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+:root.high-contrast [aria-label="Adjust font size"] {
+  color: #ffffff !important;
+}
+
+:root.high-contrast .font-size-label {
+  color: #ffffff !important;
+}
+
+:root.high-contrast svg[data-lucide="Bot"] {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Prevent yellow hover effect in checkout page */
+:root.high-contrast .hover\:bg-primary:hover,
+:root.high-contrast .hover\:bg-primary\/80:hover,
+:root.high-contrast .hover\:bg-primary\/90:hover {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+:root.high-contrast .hover\:bg-\[\#4a4865\]:hover {
+  background-color: #000000 !important;
+}
+
+/* Fix hover effect in checkout page */
+:root.high-contrast .bg-\[#5c5a7c\].p-6.relative.purple-bg:hover {
+  background-color: #000000 !important;
+}
+
+/* Override any existing hover styles */
+:root.high-contrast .purple-bg:hover {
+  background-color: #000000 !important;
+}
+
+/* Ensure no background color changes on hover for checkout page */
+:root.high-contrast .bg-\[#5c5a7c\].purple-bg {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Fix bot icon and font size button in checkout page */
+:root.high-contrast .lucide-bot {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+:root.high-contrast button[aria-label="Adjust font size"],
+:root.high-contrast button[aria-label="Adjust font size"] span {
+  color: #ffffff !important;
+}
+
+:root.high-contrast button[aria-label="Adjust font size"] svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+:root.high-contrast [data-icon="bot"] {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Fix white outline and button positioning */
+:root.high-contrast .min-h-screen.bg-white {
+  background-color: #000000 !important;
+  border: none !important;
+}
+
+/* Ensure buttons don't overlap */
+:root.high-contrast .p-8 {
+  display: flex;
+  gap: 1rem;
+  align-items: start;
+  flex-wrap: wrap;
+}
+
+/* Position controls consistently */
+:root.high-contrast button[aria-label="Adjust font size"],
+:root.high-contrast button[aria-label="Enable high contrast"],
+:root.high-contrast button[aria-label="Disable high contrast"] {
+  margin-right: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Remove any remaining white borders */
+:root.high-contrast .grid.md\:grid-cols-2 {
+  border: none !important;
+}
+
+/* Fix overlapping controls */
+:root.high-contrast .absolute.top-4.right-4 {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  width: auto;
+  z-index: 50;
+}
+
+:root.high-contrast .absolute.top-4.right-4 > * {
+  position: relative;
+  top: auto;
+  right: auto;
+}
+
+:root.high-contrast .flex.items-center.space-x-4 {
+  position: relative;
+  top: auto;
+  right: auto;
+  margin-left: auto;
+}
+
