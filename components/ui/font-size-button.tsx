@@ -43,7 +43,7 @@ export default function FontSizeSlider() {
         id="fontSizeSlider"
         type="range"
         min="10"
-        max="50"
+        max="38"
         value={fontSize}
         onChange={handleSliderChange}
         style={{ marginLeft: '10px' }}
