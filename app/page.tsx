@@ -127,53 +127,14 @@ export default function Home() {
                 </Link>
                 
                 <div className="flex space-x-4">
-                  <Button
-                    className="enlargeable flex-1 bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-6 py-4"
-                    onMouseEnter={() => speak("Download App")}
-                    onMouseLeave={stopSpeaking}
-                  >
-                    Download App
-                  </Button>
-                  
-                  <Button
-                    className="enlargeable flex-1 bg-gradient-to-r from-yellow-400 to-red-500 text-white px-6 py-4 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
-                    onMouseEnter={() => speak("Let's Play with Me!")}
-                    onMouseLeave={stopSpeaking}
-                    onClick={openPopup}
-                    aria-label="Play with Me Button"
-                  >
-                    Play with Me!
-                  </Button>
+
                 </div>
               </div>
-              
-              <div className="pt-6">
-                <h3 className="text-xl font-medium text-white/90 mb-3">How it works:</h3>
-                <div className="space-y-3">
-                  <div className="flex items-start">
-                    <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center shrink-0 mr-3">
-                      <Camera className="h-4 w-4 text-white" />
-                    </div>
-                    <p className="text-white/80">Scan items with your phone camera as you shop</p>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center shrink-0 mr-3">
-                      <ShoppingCart className="h-4 w-4 text-white" />
-                    </div>
-                    <p className="text-white/80">AI automatically identifies products and adds them to your cart</p>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center shrink-0 mr-3">
-                      <CreditCard className="h-4 w-4 text-white" />
-                    </div>
-                    <p className="text-white/80">Pay through the app and skip the checkout line entirely</p>
-                  </div>
-                </div>
-              </div>
+            
               <Button
                 className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 m-4 py-6 text-lg"
-                onMouseEnter={() => handleMouseEnter("Download SmartCart")}
-                onMouseLeave={handleMouseLeave}
+                onMouseEnter={() => speak("Download SmartCart")}
+                onMouseLeave={stopSpeaking}
               >
                 Download
               </Button>
@@ -181,8 +142,8 @@ export default function Home() {
                 <Button 
                   variant="outline" 
                   className="enlargeable border-[#5c5a7c] text-[#5c5a7c] m-4"
-                  onMouseEnter={() => handleMouseEnter("Go to Checkout")}
-                  onMouseLeave={handleMouseLeave}
+                  onMouseEnter={() => speak("Go to Checkout")}
+                  onMouseLeave={stopSpeaking}
                 >
                   Go to Checkout
                 </Button>
