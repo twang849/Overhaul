@@ -97,7 +97,7 @@ export default function Header() {
         <Link 
           onMouseEnter={() => handleMouseEnter("Artificial Intelligence")}
           onMouseLeave={handleMouseLeave}
-          href="/ai" className="enlargeable text-black hover:text-gray-700 whitespace-nowrap px-2"
+          href="/detect" className="enlargeable text-black hover:text-gray-700 whitespace-nowrap px-2"
         >
           AI
         </Link>

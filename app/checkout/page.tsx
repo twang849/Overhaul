@@ -193,9 +193,7 @@ export default function Checkout() {
         className="object-contain"
       />
     </div>
-
-
-
+                  
 
 
 
@@ -207,16 +205,6 @@ export default function Checkout() {
       >
         Pay at the Counter with Cash
       </button>
-
-
-
-
-
-
-
-
-
-
 
   <Image 
         src="paypaletc.png" 

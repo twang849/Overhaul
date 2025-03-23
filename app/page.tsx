@@ -1,5 +1,5 @@
 "use client"
-import { ShoppingCart } from "lucide-react"
+import { ShoppingCart, Camera, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -310,7 +310,19 @@ const useTTS = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-
+          <div>
+          <Link href="/detect">
+                  <Button
+                    className="enlargeable w-full md:w-auto bg-white text-[#5c5a7c] hover:bg-white/90 px-8 py-6 text-lg flex items-center"
+                    onMouseEnter={() => speak("Start Scanning")}
+                    onMouseLeave={stopSpeaking}
+                  >
+                    <Camera className="mr-2 h-5 w-5" />
+                    Start Scanning
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+          </div>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
               <h1 
