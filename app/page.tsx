@@ -10,6 +10,13 @@ import { ContrastToggle } from "@/components/ui/contrast-toggle";
 import "@/styles/contrast-styles.css";
 import FontSizeSlider from "@/components/ui/font-size-button";
 import { MagnifierToggle } from "@/components/ui/magnifier-toggle";
+import { Settings } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const welcomeStyles = `
   @keyframes fadeInScale {
@@ -254,32 +261,54 @@ const useTTS = () => {
         </div>
         <div className="container mx-auto px-4 py-16 md:py-24">
           {/* Accessibility Controls */}
-          <div className={`absolute top-4 right-4 flex items-center space-x-4 transition-opacity duration-500 ${showWelcome ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-            <div 
-              className="flex items-center space-x-2"
-              onMouseEnter={() => handleMouseEnter("Toggle High Contrast Mode")}
-              onMouseLeave={handleMouseLeave}
-            >
-              <ContrastToggle />
-              <MagnifierToggle />
-            </div>
-            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2"
-              onMouseEnter={() => handleMouseEnter("Toggle Text-to-Speech")}
-              onMouseLeave={handleMouseLeave}
-            >
-              <span className="enlargeable text-sm text-white">Text-to-Speech</span>
-              <Switch
-                checked={isTTSEnabled}
-                onCheckedChange={() => setIsTTSEnabled(!isTTSEnabled)}
-                aria-label="Toggle text-to-speech"
-              />
-            </div>
-            <div 
-              onMouseEnter={() => handleMouseEnter("Adjust Font Size")}
-              onMouseLeave={handleMouseLeave}
-            >
-              <FontSizeSlider />  
-            </div>
+          <div className={`absolute top-4 right-4 transition-opacity duration-500 ${showWelcome ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20"
+                  onMouseEnter={() => handleMouseEnter("Accessibility Options")}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <Settings className="h-5 w-5 mr-2" />
+                  <span className="text-white">Accessibility Options</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-60">
+                <DropdownMenuItem className="flex items-center justify-between p-2"
+                  onMouseEnter={() => handleMouseEnter("Toggle High Contrast Mode")}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <span>High Contrast Mode</span>
+                  <ContrastToggle />
+                </DropdownMenuItem>
+                <DropdownMenuItem className="flex items-center justify-between p-2"
+                  onMouseEnter={() => handleMouseEnter("Toggle Magnifying Glass")}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <span>Magnifying Glass</span>
+                  <MagnifierToggle />
+                </DropdownMenuItem>
+                <DropdownMenuItem className="flex items-center justify-between p-2"
+                  onMouseEnter={() => handleMouseEnter("Toggle Text-to-Speech")}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <span>Text-to-Speech</span>
+                  <Switch
+                    checked={isTTSEnabled}
+                    onCheckedChange={() => setIsTTSEnabled(!isTTSEnabled)}
+                    aria-label="Toggle text-to-speech"
+                  />
+                </DropdownMenuItem>
+                <DropdownMenuItem className="flex items-center justify-between p-2"
+                  onMouseEnter={() => handleMouseEnter("Adjust Font Size")}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <span>Font Size</span>
+                  <FontSizeSlider />
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 items-center">
