@@ -145,12 +145,14 @@ export default function Header() {
           href="/login" className="enlargeable text-black hover:text-gray-700 whitespace-nowrap px-2">
           Log In
         </Link>
-        <Button 
-          onMouseEnter={() => handleMouseEnter("SIGN UP")}
-          onMouseLeave={handleMouseLeave}
-          className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] whitespace-nowrap px-4">
-          SIGN UP
-        </Button>
+        <Link href="/signup">
+          <Button 
+            onMouseEnter={() => handleMouseEnter("SIGN UP")}
+            onMouseLeave={handleMouseLeave}
+            className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] whitespace-nowrap px-4">
+            SIGN UP
+          </Button>
+        </Link>
       </div>
     </header>
   )
