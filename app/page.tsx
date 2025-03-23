@@ -1,5 +1,5 @@
 "use client"
-import { ShoppingCart, Camera, ArrowRight } from "lucide-react"
+import { ShoppingCart,} from "lucide-react"
 import Link from "next/link"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -266,12 +266,12 @@ const useTTS = () => {
               <DropdownMenuTrigger asChild>
                 <Button 
                   variant="outline" 
-                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20"
+                  className="accessibility-options-btn"
                   onMouseEnter={() => handleMouseEnter("Accessibility Options")}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <Settings className="h-5 w-5 mr-2" />
-                  <span className="text-white">Accessibility Options</span>
+                  <Settings className="h-5 w-5 mr-2 text-black" />
+                  <span>Accessibility Options</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-60">
@@ -337,13 +337,13 @@ const useTTS = () => {
                 SmartCart revolutionizes grocery shopping with AI-powered, accessible, and seamless checkout solutions —
                 making every trip faster, easier, and smarter for all.
               </p>
-              <Button
-                className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 m-4 py-6 text-lg"
+                <Button
+                className="enlargeable download-button px-8 m-4 py-6 text-lg"
                 onMouseEnter={() => handleMouseEnter("Download SmartCart")}
                 onMouseLeave={handleMouseLeave}
-              >
+                >
                 Download
-              </Button>
+                </Button>
               <Link href="/checkout" className="inline-block mt-4">
                 <Button 
                   variant="outline" 

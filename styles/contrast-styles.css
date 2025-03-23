@@ -75,7 +75,7 @@
     background-color: #000000 !important;
   }
   
-  :root.high-contrast .rou  nded-t-\[24px\] {
+  :root.high-contrast .rounded-t-\[24px\] {
     background-color: #000000 !important;
   }
   
@@ -262,40 +262,6 @@
   background-color: #e6e600 !important;
 }
 
-html.high-contrast {
-  --text-color: #ffffff;
-  --background-color: #000000;
-  --button-bg: #ffff00;
-  --button-hover: #e6e600;
-}
-
-html.high-contrast .bg-gradient-to-br {
-  background: var(--background-color) !important;
-}
-
-html.high-contrast h1,
-html.high-contrast h2,
-html.high-contrast p {
-  color: var(--text-color) !important;
-}
-
-html.high-contrast .bg-white\/10 {
-  background-color: var(--text-color) !important;
-}
-
-html.high-contrast .text-white {
-  color: var(--background-color) !important;
-}
-
-html.high-contrast .bg-\[\#5c5a7c\] {
-  background-color: var(--button-bg) !important;
-  color: var(--background-color) !important;
-}
-
-html.high-contrast .bg-\[\#5c5a7c\]:hover {
-  background-color: var(--button-hover) !important;
-}
-
 /* Checkout page specific styles */
 :root.high-contrast .bg-\[#5c5a7c\] {
   background-color: #000000 !important;
@@ -347,12 +313,6 @@ html.high-contrast .bg-\[\#5c5a7c\]:hover {
   border-right: 2px solid #ffffff !important;
 }
 
-/* Ensure the existing styles remain consistent */
-:root.high-contrast .bg-\[#5c5a7c\] {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-}
-
 /* Fix font size adjustment and bot logo visibility */
 :root.high-contrast .Bot {
   color: #ffffff !important;
@@ -378,10 +338,6 @@ html.high-contrast .bg-\[\#5c5a7c\]:hover {
 :root.high-contrast .hover\:bg-primary\/90:hover {
   background-color: #000000 !important;
   color: #ffffff !important;
-}
-
-:root.high-contrast .hover\:bg-\[\#4a4865\]:hover {
-  background-color: #000000 !important;
 }
 
 /* Fix hover effect in checkout page */
@@ -479,19 +435,6 @@ html.high-contrast .bg-\[\#5c5a7c\]:hover {
   color: #ffffff !important;
 }
 
-/* Make download button match checkout button */
-:root.high-contrast button[aria-label="Download"],
-:root.high-contrast .download-button {
-  background-color: #ffff00 !important;
-  color: #000000 !important;
-  border: 2px solid #ffffff !important;
-}
-
-:root.high-contrast button[aria-label="Download"]:hover,
-:root.high-contrast .download-button:hover {
-  background-color: #e6e600 !important;
-}
-
 /* Download button styles for high contrast mode */
 :root.high-contrast button[aria-label="Download"],
 :root.high-contrast .download-button,
@@ -535,4 +478,12 @@ html.high-contrast .bg-\[\#5c5a7c\]:hover {
   color: #000000 !important;
 }
 
+/* Reset conflicting rule */
+:root.high-contrast .hover\:bg-\[#4a4865\]:hover {
+  background-color: #000000 !important;
+}
 
+:root.high-contrast .bg-white text-black hover:bg-gray-100{
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
