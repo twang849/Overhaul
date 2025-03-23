@@ -1,5 +1,5 @@
 "use client"
-import { ShoppingCart, Camera, ArrowRight, Settings } from "lucide-react"
+import { ShoppingCart,} from "lucide-react"
 import Link from "next/link"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,7 @@ import { ContrastToggle } from "@/components/ui/contrast-toggle";
 import "@/styles/contrast-styles.css";
 import FontSizeSlider from "@/components/ui/font-size-button";
 import { MagnifierToggle } from "@/components/ui/magnifier-toggle";
-
+import { Settings } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -158,12 +158,6 @@ const useTTS = () => {
   // Initialize TTS hook
   const { isTTSEnabled, setIsTTSEnabled, speak, stopSpeaking } = useTTS()
 
-  const toggleTTS = () => {
-    const newValue = !isTTSEnabled;
-    setIsTTSEnabled(newValue);
-    localStorage.setItem('isTTSEnabled', JSON.stringify(newValue));
-  };
-
   // Memoized hover handlers for better performance
   const handleMouseEnter = useCallback((text: string) => {
     speak(text)
@@ -276,8 +270,8 @@ const useTTS = () => {
                   onMouseEnter={() => handleMouseEnter("Accessibility Options")}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <Settings className="h-5 w-5 mr-2" />
-                  <span className="text-white">Accessibility Options</span>
+                  <Settings className="h-5 w-5 mr-2 text-black" />
+                  <span>Accessibility Options</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-60">
@@ -302,7 +296,7 @@ const useTTS = () => {
                   <span>Text-to-Speech</span>
                   <Switch
                     checked={isTTSEnabled}
-                    onCheckedChange={toggleTTS}
+                    onCheckedChange={() => setIsTTSEnabled(!isTTSEnabled)}
                     aria-label="Toggle text-to-speech"
                   />
                 </DropdownMenuItem>
