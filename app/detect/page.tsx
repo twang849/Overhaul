@@ -56,7 +56,7 @@ export default function Detect() {
     const items = [
       { id: 1, name: "Banana Bundle", price: 2.99, quantity: 1 },
       { id: 2, name: "Organic Apples", price: 4.99, quantity: 1 },
-      { id: 3, name: "Avocado", price: 1.49, quantity: 1 }
+      { id: 3, name: "Apple Juice", price: 3.49, quantity: 1 },
     ]
     
     const randomItem = items[Math.floor(Math.random() * items.length)]
