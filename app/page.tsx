@@ -1,5 +1,5 @@
 "use client"
-import { ShoppingCart, Camera, ArrowRight } from "lucide-react"
+import { ShoppingCart, Camera, ArrowRight, Settings } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
