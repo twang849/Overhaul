@@ -24,17 +24,17 @@ const helpSections: HelpSection[] = [
       {
         id: 'what-is-smartcart',
         title: 'What is SmartCart?',
-        content: `SmartCart is an innovative AI-powered shopping system that revolutionizes the retail experience. 
-        Using advanced computer vision and AI technology, SmartCart automatically detects items as you shop,
-        eliminating the need for manual scanning and long checkout lines.`
+        content: `SmartCart is an innovative AI-powered shopping system that revolutionizes the retail experience. Using advanced computer vision and AI technology, SmartCart automatically detects items as you shop, eliminating the need for manual scanning and long checkout lines.`
       },
       {
         id: 'how-to-start',
         title: 'How to Start Using SmartCart',
-        content: `1. Download the SmartCart app from your device's app store
+        content: `
+        1. Download the SmartCart app from your device's app store
         2. Create an account and add your payment method
         3. Visit any SmartCart-enabled store
-        4. Start shopping - items will be automatically detected and added to your cart
+        4. Start shopping - items will be automatically detected and added to 
+            your cart
         5. Complete your purchase through the app when finished`
       }
     ]
@@ -54,6 +54,10 @@ const helpSections: HelpSection[] = [
         • Get product information
         • Complete your purchase
         • Request assistance
+        • Navigate the app
+        • Access help and support
+        • Manage your account
+
         All interface elements are properly labeled for screen readers.`
       },
       {
@@ -88,7 +92,8 @@ const helpSections: HelpSection[] = [
         id: 'payment-issues',
         title: 'Payment and Checkout Problems',
         content: `Common payment issues and solutions:
-        • Payment not processing: Verify your internet connection and payment method
+        • Payment not processing: Verify your internet connection and payment 
+          method
         • Incorrect total: Review your cart and refresh the app
         • Checkout error: Clear app cache or try alternative payment method
         
