@@ -13,7 +13,7 @@
     --secondary: #00ffff;
     --border: #ffffff;
     --input: #ffffff;
-    --ring: black;
+    --ring:black;
   }
   
   /* Override background in high contrast mode */

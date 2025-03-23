@@ -8,7 +8,7 @@ import { useState, useCallback, useRef, useEffect } from "react";
 
 export default function Header() {
   const useTTS = () => {
-    const [isTTSEnabled, setIsTTSEnabled] = useState(true)
+    const [isTTSEnabled, setIsTTSEnabled] = useState(false)
     const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
   
     // Initialize speech synthesis
@@ -54,6 +54,13 @@ export default function Header() {
         }
       }
     }, [isTTSEnabled, stopSpeaking])
+
+    useEffect(() => {
+      const savedValue = localStorage.getItem('isTTSEnabled');
+      if (savedValue) {
+        setIsTTSEnabled(JSON.parse(savedValue));
+      }
+    }, []);
   
     return {
       isTTSEnabled,
