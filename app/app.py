@@ -1,36 +1,23 @@
-from flask import Flask, render_template, request, jsonify
-import os
+from flask import Flask, render_template
+from flask_cors import CORS
 
-# Import your object detection blueprint
+# Import the blueprint
 from app.ai.object_detection import object_detection_bp
 
-def create_app():
-    app = Flask(__name__)
-    
-    # Register the object detection blueprint
-    app.register_blueprint(object_detection_bp)
-    
-    # Ensure the static directory exists
-    os.makedirs('app/static/js', exist_ok=True)
-    
-    # Add route for the scanner page
-    @app.route('/scanner')
-    def scanner():
-        return render_template('scanner.html')
-    
-    # Add other existing routes
-    @app.route('/')
-    def index():
-        return render_template('index.html')
-    
-    @app.route('/about')
-    def about():
-        return render_template('about.html')
-    
-    # Add more routes as needed
-    
-    return app
+app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
+
+# Register the blueprint
+app.register_blueprint(object_detection_bp)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/scanner')
+def scanner():
+    return render_template('scanner.html')
 
 if __name__ == '__main__':
-    app = create_app()
-    app.run(debug=True)
+    print("Starting Overhaul Server...")
+    app.run(debug=True, port=5000)
