@@ -6,28 +6,24 @@ import { useEffect, useState } from "react"
 import { enableMagnifier, disableMagnifier } from "./magnifier"
 
 export function MagnifierToggle() {
-  const [magnifierActive, setMagnifierActive] = useState(true)
+  const [magnifierActive, setMagnifierActive] = useState(false)
 
   useEffect(() => {
-    // Check if user has previously set magnifier preference
-    const savedMagnifier = localStorage.getItem("magnifierActive")
-    if (savedMagnifier) {
-      const isActive = JSON.parse(savedMagnifier)
-      setMagnifierActive(isActive)
-      if (isActive) {
-        enableMagnifier(); // Enable magnifier if previously active
-      }
-    }
+    // Always start with magnifier disabled
+    disableMagnifier();
+    setMagnifierActive(false);
+    // Clear any saved preference
+    localStorage.removeItem("magnifierActive");
   }, [])
 
   const toggleMagnifier = () => {
     if (magnifierActive) {
-      disableMagnifier(); // Disable magnifier if it's currently active
+      disableMagnifier();
     } else {
-      enableMagnifier(); // Enable magnifier if it's currently inactive
+      enableMagnifier();
     }
-    setMagnifierActive(!magnifierActive); // Toggle state after action
-    localStorage.setItem("magnifierActive", JSON.stringify(!magnifierActive)); // Save updated state
+    setMagnifierActive(!magnifierActive);
+    localStorage.setItem("magnifierActive", JSON.stringify(!magnifierActive));
   }
 
   return (
@@ -39,7 +35,6 @@ export function MagnifierToggle() {
       className="magnifier-toggle-button flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-8"
     >
       <div style={{fontSize: '16px'}}>Magnifying<br/>Glass</div>
-      {/* Correct the icon rendering */}
       {magnifierActive ? <Search className="h-5 w-5" /> : <X className="h-5 w-5" />}
     </Button>
   )
