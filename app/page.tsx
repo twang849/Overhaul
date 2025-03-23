@@ -1,5 +1,4 @@
 "use client"
-import { ShoppingCart, Camera, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -10,7 +9,7 @@ import { ContrastToggle } from "@/components/ui/contrast-toggle";
 import "@/styles/contrast-styles.css";
 import FontSizeSlider from "@/components/ui/font-size-button";
 import { MagnifierToggle } from "@/components/ui/magnifier-toggle";
-import { Settings } from "lucide-react";
+import { Settings, ShoppingCart, ArrowRight } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -158,6 +157,12 @@ const useTTS = () => {
   // Initialize TTS hook
   const { isTTSEnabled, setIsTTSEnabled, speak, stopSpeaking } = useTTS()
 
+  const toggleTTS = () => {
+    const newValue = !isTTSEnabled;
+    setIsTTSEnabled(newValue);
+    localStorage.setItem('isTTSEnabled', JSON.stringify(newValue));
+  };
+
   // Memoized hover handlers for better performance
   const handleMouseEnter = useCallback((text: string) => {
     speak(text)
@@ -296,7 +301,7 @@ const useTTS = () => {
                   <span>Text-to-Speech</span>
                   <Switch
                     checked={isTTSEnabled}
-                    onCheckedChange={() => setIsTTSEnabled(!isTTSEnabled)}
+                    onCheckedChange={toggleTTS}
                     aria-label="Toggle text-to-speech"
                   />
                 </DropdownMenuItem>
