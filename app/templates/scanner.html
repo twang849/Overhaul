@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCart - Product Scanner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Additional styles for camera interface */
+        .scanner-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            gap: 20px;
+        }
+        
+        .video-container {
+            position: relative;
+            max-width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        #videoElement {
+            width: 100%;
+            max-width: 640px;
+            height: auto;
+            display: block;
+        }
+        
+        #canvasElement {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+        }
+        
+        .scanner-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .scanner-button {
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .scanner-button.secondary {
+            background-color: #2196F3;
+        }
+        
+        .scanner-button:hover {
+            background-color: #3e8e41;
+        }
+        
+        .scanner-button.secondary:hover {
+            background-color: #0b7dda;
+        }
+        
+        .detected-items {
+            width: 100%;
+            max-width: 640px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            background: #f9f9f9;
+        }
+        
+        .detected-items h3 {
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .item-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .item-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .item-card button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        /* Accessibility features */
+        .accessibility-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .accessibility-button {
+            padding: 8px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        /* High contrast mode */
+        body.high-contrast {
+            background-color: black;
+            color: white;
+        }
+        
+        body.high-contrast .item-card {
+            background-color: black;
+            color: white;
+            border: 1px solid white;
+        }
+        
+        body.high-contrast .detected-items {
+            background-color: black;
+            border-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SmartCart Product Scanner</h1>
+            <p>Scan your products to add them to your cart</p>
+        </header>
+        
+        <div class="accessibility-controls">
+            <button id="contrastToggle" class="accessibility-button">Toggle High Contrast</button>
+            <button id="fontSizeIncrease" class="accessibility-button">Increase Font Size</button>
+            <button id="fontSizeDecrease" class="accessibility-button">Decrease Font Size</button>
+            <button id="readAloud" class="accessibility-button">Read Aloud</button>
+        </div>
+        
+        <div class="scanner-container">
+            <div class="video-container">
+                <video id="videoElement" autoplay playsinline></video>
+                <canvas id="canvasElement"></canvas>
+            </div>
+            
+            <div class="scanner-controls">
+                <button id="captureButton" class="scanner-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19 19H5a2 2 0 01-2-2V7a2 2 0 012-2h4l2-3h2l2 3h4a2 2 0 012 2v10a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Scan Products
+                </button>
+                <button id="autoScanButton" class="scanner-button secondary">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16.5 6.5h-9a2 2 0 00-2 2v7a2 2 0 002 2h9a2 2 0 002-2v-7a2 2 0 00-2-2z"></path>
+                        <rect x="9" y="10" width="6" height="4" rx="1"></rect>
+                    </svg>
+                    Auto Scan
+                </button>
+            </div>
+            
+            <div class="detected-items">
+                <h3>Detected Products</h3>
+                <ul id="itemList" class="item-list">
+                    <li class="item-card">No items detected yet. Scan products to begin.</li>
+                </ul>
+                
+                <div class="cart-summary" id="cartSummary" style="display: none;">
+                    <h3>Cart Summary</h3>
+                    <p><span id="cartItemCount">0</span> items in cart</p>
+                    <button id="checkoutButton" class="scanner-button">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/ObjectDetection.js') }}"></script>
+    <script>
+        // Initialize the object detector
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Set up accessibility controls
+            const contrastToggle = document.getElementById('contrastToggle');
+            const fontSizeIncrease = document.getElementById('fontSizeIncrease');
+            const fontSizeDecrease = document.getElementById('fontSizeDecrease');
+            const readAloud = document.getElementById('readAloud');
+            
+            // Current font size percentage
+            let currentFontSize = 100;
+            
+            contrastToggle.addEventListener('click', () => {
+                document.body.classList.toggle('high-contrast');
+            });
+            
+            fontSizeIncrease.addEventListener('click', () => {
+                currentFontSize += 10;
+                document.body.style.fontSize = `${currentFontSize}%`;
+            });
+            
+            fontSizeDecrease.addEventListener('click', () => {
+                if (currentFontSize > 70) {
+                    currentFontSize -= 10;
+                    document.body.style.fontSize = `${currentFontSize}%`;
+                }
+            });
+            
+            readAloud.addEventListener('click', () => {
+                // Get all visible text on the page
+                const textToRead = document.querySelector('.container').innerText;
+                
+                // Use Speech Synthesis API
+                const utterance = new SpeechSynthesisUtterance(textToRead);
+                window.speechSynthesis.speak(utterance);
+            });
+            
+            // Initialize object detector
+            const detector = new SmartCartObjectDetector();
+            const initialized = await detector.initialize('videoElement', 'canvasElement', 'captureButton');
+            
+            if (!initialized) {
+                alert('Could not initialize camera. Please check camera permissions and try again.');
+                return;
+            }
+            
+            // Set up auto scan toggle
+            const autoScanButton = document.getElementById('autoScanButton');
+            let autoScanActive = false;
+            
+            autoScanButton.addEventListener('click', () => {
+                if (autoScanActive) {
+                    detector.stopAutoDetection();
+                    autoScanButton.textContent = 'Start Auto Scan';
+                    autoScanActive = false;
+                } else {
+                    detector.startAutoDetection(2000); // Scan every 2 seconds
+                    autoScanButton.textContent = 'Stop Auto Scan';
+                    autoScanActive = true;
+                }
+            });
+            
+            // Cart functionality
+            const cartItems = [];
+            const itemList = document.getElementById('itemList');
+            const cartSummary = document.getElementById('cartSummary');
+            const cartItemCount = document.getElementById('cartItemCount');
+            
+            // Function to update the item list
+            async function updateItemList(detectedItems) {
+                if (!detectedItems || detectedItems.length === 0) {
+                    itemList.innerHTML = '<li class="item-card">No items detected. Try scanning again.</li>';
+                    return;
+                }
+                
+                itemList.innerHTML = '';
+                detectedItems.forEach((item, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'item-card';
+                    li.innerHTML = `
+                        <span>${item.class} (${Math.round(item.confidence * 100)}%)</span>
+                        <button class="add-to-cart" data-index="${index}">+</button>
+                    `;
+                    itemList.appendChild(li);
+                });
+                
+                // Add event listeners to the add buttons
+                document.querySelectorAll('.add-to-cart').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const index = parseInt(e.target.getAttribute('data-index'));
+                        const item = detectedItems[index];
+                        
+                        // Add to cart
+                        cartItems.push(item);
+                        cartItemCount.textContent = cartItems.length;
+                        
+                        // Show cart summary if not visible
+                        cartSummary.style.display = 'block';
+                        
+                        // Provide feedback
+                        alert(`Added ${item.class} to your cart!`);
+                    });
+                });
+            }
+            
+            // Listen for detection results
+            detector.captureAndDetect().then(updateItemList);
+            
+            // Set up checkout button
+            document.getElementById('checkoutButton').addEventListener('click', () => {
+                if (cartItems.length > 0) {
+                    alert(`Proceeding to checkout with ${cartItems.length} items`);
+                    // Here you would typically redirect to a checkout page
+                    // window.location.href = '/checkout';
+                } else {
+                    alert('Please add items to your cart first');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
