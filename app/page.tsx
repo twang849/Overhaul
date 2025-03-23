@@ -1,5 +1,5 @@
 "use client"
-import { ShoppingCart } from "lucide-react"
+import { ShoppingCart, Camera, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -310,7 +310,8 @@ const useTTS = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-
+          <div>
+          </div>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
               <h1 
