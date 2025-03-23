@@ -34,7 +34,12 @@ export function MagnifierToggle() {
       onClick={toggleMagnifier}
       className="magnifier-toggle-button flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2"
     >
-      {magnifierActive ? <Search className="h-5 w-5" /> : <X className="h-5 w-5" />}
+      {magnifierActive ? (
+  <span role="img" aria-label="close" className="h-5 w-5">❌</span>
+) : (
+  <span role="img" aria-label="search" className="h-5 w-5">🔍</span>
+)}
+
     </Button>
   )
 }
