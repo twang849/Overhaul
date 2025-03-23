@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+/app/ai/yolo3.cfg
+/app/ai/yolo3.weights
+
 # next.js
 /.next/
 /out/

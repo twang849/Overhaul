@@ -1,371 +1,177 @@
+// app/page.tsx
 "use client"
-import { ShoppingCart } from "lucide-react"
+
+import { ShoppingCart, Camera, CreditCard, ArrowRight } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import "@/styles/magnifier.css"; 
-import { useState, useCallback, useRef, useEffect } from "react";
-import { Switch } from "@/components/ui/switch";
-import { ContrastToggle } from "@/components/ui/contrast-toggle";
-import "@/styles/contrast-styles.css";
-import FontSizeSlider from "@/components/ui/font-size-button";
-import { MagnifierToggle } from "@/components/ui/magnifier-toggle";
-import { Settings } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
-const welcomeStyles = `
-  @keyframes fadeInScale {
-    0% { 
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    100% { 
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @keyframes fadeOutScale {
-    0% { 
-      opacity: 1;
-      transform: scale(1);
-    }
-    100% { 
-      opacity: 0;
-      transform: scale(1.1);
-    }
-  }
-
-  .welcome-enter {
-    animation: fadeInScale 1s ease-out forwards;
-  }
-
-  .welcome-exit {
-    animation: fadeOutScale 1s ease-in forwards;
-  }
-`;
-
-const slideOutKeyframes = `
-  @keyframes slideOut {
-    0% { transform: translateY(0); opacity: 1; }
-    80% { transform: translateY(-100%); opacity: 1; }
-    100% { transform: translateY(-100%); opacity: 0; display: none; }
-  }
-  @keyframes fadeIn {
-    0% { opacity: 0; transform: scale(0.9); }
-    100% { opacity: 1; transform: scale(1); }
-  }
-`;
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { Switch } from "@/components/ui/switch"
+import { useState, useCallback, useRef, useEffect } from "react"
+import { ContrastToggle } from "@/components/ui/contrast-toggle"
+import { MagnifierToggle } from "@/components/ui/magnifier-toggle"
+import FontSizeSlider from "@/components/ui/font-size-button"
+import "@/styles/magnifier.css"
+import "@/styles/contrast-styles.css"
 
 export default function Home() {
-
-  const [showWelcome, setShowWelcome] = useState(true);
-  const [isExiting, setIsExiting] = useState(false);
-
-  useEffect(() => {
-    // Add the animation styles
-    const style = document.createElement('style');
-    style.innerHTML = welcomeStyles;
-    document.head.appendChild(style);
-
-    // Start exit animation after 2 seconds
-    const exitTimer = setTimeout(() => {
-      setIsExiting(true);
-      // Remove component after exit animation completes
-      setTimeout(() => {
-        setShowWelcome(false);
-      }, 1000);
-    }, 2000);
-
-    return () => {
-      document.head.removeChild(style);
-      clearTimeout(exitTimer);
-    };
-  }, []);
-
-  const openPopup = useCallback(() => {
-    const popup = window.open(
-      '/for-kids.html', 
-      'for-kids', 
-      'width=600,height=400,scrollbars=yes,resizable=yes'
-    );
-  
-    if (!popup) {
-      console.error('Popup blocked by the browser');
-    }
-  }, []);
-    
-const useTTS = () => {
   const [isTTSEnabled, setIsTTSEnabled] = useState(false)
-  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
-
-  // Initialize speech synthesis
-  const speak = useCallback((text: string) => {
-    if (!isTTSEnabled) return
-
-    // Check browser compatibility
-    if (!('speechSynthesis' in window)) {
-      console.warn('Text-to-speech not supported in this browser')
-      return
-    }
-
-    // Cancel any ongoing speech
-    stopSpeaking()
-
-    // Create and configure utterance
+  
+  const speak = useCallback((text: string | undefined) => {
+    if (!isTTSEnabled || !('speechSynthesis' in window)) return
+    
+    window.speechSynthesis.cancel()
     const utterance = new SpeechSynthesisUtterance(text)
-    utterance.rate = 1.0
-    utterance.pitch = 1.0
-    utterance.volume = 1.0
-
-    // Store reference to current utterance
-    utteranceRef.current = utterance
-
-    // Speak the text
     window.speechSynthesis.speak(utterance)
   }, [isTTSEnabled])
-
-  // Function to stop speech
+  
   const stopSpeaking = useCallback(() => {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel()
-      utteranceRef.current = null
     }
   }, [])
 
-  // Cleanup function to stop speech when component unmounts
-  // or when TTS is disabled
-  useEffect(() => {
-    return () => {
-      if (!isTTSEnabled) {
-        stopSpeaking()
-      }
+  const handleTTSToggle = useCallback((checked: boolean) => {
+    setIsTTSEnabled(checked)
+    // Announce the new state
+    if ('speechSynthesis' in window) {
+      const message = checked ? "Text to speech enabled" : "Text to speech disabled"
+      const utterance = new SpeechSynthesisUtterance(message)
+      window.speechSynthesis.speak(utterance)
     }
-  }, [isTTSEnabled, stopSpeaking])
+  }, [])
 
-  return {
-    isTTSEnabled,
-    setIsTTSEnabled,
-    speak,
-    stopSpeaking
-  }
-}
-  // Initialize TTS hook
-  const { isTTSEnabled, setIsTTSEnabled, speak, stopSpeaking } = useTTS()
-
-  // Memoized hover handlers for better performance
-  const handleMouseEnter = useCallback((text: string) => {
-    speak(text)
-  }, [speak])
-
-  const handleMouseLeave = useCallback(() => {
-    stopSpeaking()
-  }, [stopSpeaking])
-
-  useEffect(() => {
-    // Add animation styles to head
-    const styleSheet = document.createElement("style");
-    styleSheet.innerText = slideOutKeyframes;
-    document.head.appendChild(styleSheet);
-
-    return () => {
-      document.head.removeChild(styleSheet);
-    };
-  }, []);
-
-  useEffect(() => {
-    // Create a script element
-    const script = document.createElement('script');
-    script.src = './magnifier.js'; // Adjust the path as needed
-    script.async = true;
-    document.body.appendChild(script);
+  // Popup for kids mode
+  const openPopup = useCallback(() => {
+    const popup = window.open(
+      '/for-kids.html',
+      'for-kids',
+      'width=600,height=400,scrollbars=yes,resizable=yes'
+    )
   
-    const savedContrast = localStorage.getItem("highContrast");
-    if (savedContrast === "true") {
-      document.documentElement.classList.add("high-contrast");
+    if (!popup) {
+      console.error('Popup blocked by the browser')
     }
-  
-    return () => {
-      // Cleanup the script when the component unmounts
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  useEffect (() => {
-    if (typeof window != undefined) {
-  const SpeechRecognition =
-  window.SpeechRecognition || window.webkitSpeechRecognition;
-  const SpeechGrammarList =
-    window.SpeechGrammarList || window.webkitSpeechGrammarList;
-  const SpeechRecognitionEvent =
-    window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
-
-    const commands = [
-      "go to home",
-      "go to checkout"
-    ];
-    const grammar = `#JSGF V1.0; grammar colors; public <command> = ${commands.join(
-      " | ",
-    )};`;    
-
-  const recognition = new SpeechRecognition();
-  const speechRecognitionList = new SpeechGrammarList();  
-  
-  speechRecognitionList.addFromString(grammar);
-
-  recognition.grammars = speechRecognitionList;
-  recognition.continuous= true;
-
-  document.body.onclick = () => {
-    try {
-      recognition.start();
-    } catch (Exception) {
-      console.log("Recognition already started.")
-    }
-    console.log("Ready to receive a command.");
-  };
-
-  recognition.onresult = (event: any) => {
-    let result: String = event.results[0][0].transcript;
-    console.log(result);
-
-    switch (result) {
-      case "go to check out":
-        window.location.href = 'http://localhost:3000/checkout';
-        break;
-    }
-  }
-
-  recognition.onnomatch = (event: any) => {
-    console.log("Unrecognized command.")
-  }
-}
-}, []);
+  }, [])
 
   return (
     <div className="min-h-screen">
-      {showWelcome && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c] z-[9999]">
-          <div className={`text-5xl font-bold text-white ${isExiting ? 'welcome-exit' : 'welcome-enter'}`}>
-            Welcome to SMARTCART 🛒
-          </div>
-        </div>
-      )}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c]">
-        <div className="absolute top-4 right-4 z-50">
-        </div>
-        <div className="container mx-auto px-4 py-16 md:py-24">
-          {/* Accessibility Controls */}
-          <div className={`absolute top-4 right-4 transition-opacity duration-500 ${showWelcome ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="outline" 
-                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20"
-                  onMouseEnter={() => handleMouseEnter("Accessibility Options")}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <Settings className="h-5 w-5 mr-2" />
-                  <span className="text-white">Accessibility Options</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-60">
-                <DropdownMenuItem className="flex items-center justify-between p-2"
-                  onMouseEnter={() => handleMouseEnter("Toggle High Contrast Mode")}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <span>High Contrast Mode</span>
-                  <ContrastToggle />
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex items-center justify-between p-2"
-                  onMouseEnter={() => handleMouseEnter("Toggle Magnifying Glass")}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <span>Magnifying Glass</span>
-                  <MagnifierToggle />
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex items-center justify-between p-2"
-                  onMouseEnter={() => handleMouseEnter("Toggle Text-to-Speech")}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <span>Text-to-Speech</span>
-                  <Switch
-                    checked={isTTSEnabled}
-                    onCheckedChange={() => setIsTTSEnabled(!isTTSEnabled)}
-                    aria-label="Toggle text-to-speech"
-                  />
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex items-center justify-between p-2"
-                  onMouseEnter={() => handleMouseEnter("Adjust Font Size")}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <span>Font Size</span>
-                  <FontSizeSlider />
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+        {/* Accessibility Controls */}
+        <div className="absolute top-4 right-4 flex items-center space-x-4">
+          <div 
+            className="flex items-center space-x-2"
+            onMouseEnter={() => speak("Toggle High Contrast Mode")}
+            onMouseLeave={stopSpeaking}
+          >
+            <ContrastToggle />
+            <MagnifierToggle />
           </div>
+          <div 
+            className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2"
+            onMouseEnter={() => speak(isTTSEnabled ? "Text-to-Speech is enabled. Click to disable" : "Text-to-Speech is disabled. Click to enable")}
+            onMouseLeave={stopSpeaking}
+          >
+            <span className="enlargeable text-sm text-white">Text-to-Speech</span>
+            <Switch
+              checked={isTTSEnabled}
+              onCheckedChange={handleTTSToggle}
+              aria-label={`Text-to-speech is ${isTTSEnabled ? 'enabled' : 'disabled'}`}
+              aria-pressed={isTTSEnabled}
+            />
+          </div>
+          <div 
+            onMouseEnter={() => speak("Adjust Font Size")}
+            onMouseLeave={stopSpeaking}
+          >
+            <FontSizeSlider />  
+          </div>
+        </div>
 
+        <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
               <h1 
-                className="enlargeable text-6xl font-bold tracking-tight"
-                onMouseEnter={() => handleMouseEnter("SmartCart")}
-                onMouseLeave={handleMouseLeave}
-                style = {{fontSize: '30px'}}
+                className="enlargeable text-6xl font-bold tracking-tight text-white"
+                onMouseEnter={() => speak("SmartCart")}
+                onMouseLeave={stopSpeaking}
               >
                 SmartCart
               </h1>
               <h2 
-                className="enlargeable text-3xl font-medium"
-                onMouseEnter={() => handleMouseEnter("Shop Smarter, Checkout Faster!")}
-                onMouseLeave={handleMouseLeave}
+                className="enlargeable text-3xl font-medium text-white/90"
+                onMouseEnter={() => speak("Shop Smarter, Checkout Faster!")}
+                onMouseLeave={stopSpeaking}
               >
                 Shop Smarter, Checkout Faster!
               </h2>
               <p 
-                className="enlargeable text-lg max-w-md"
-                onMouseEnter={() => handleMouseEnter("SmartCart revolutionizes grocery shopping with AI-powered, accessible, and seamless checkout solutions — making every trip faster, easier, and smarter for all.")}
-                onMouseLeave={handleMouseLeave}
+                className="enlargeable text-lg max-w-md text-white/80"
+                onMouseEnter={() => speak("SmartCart revolutionizes grocery shopping with AI-powered, accessible, and seamless checkout solutions — making every trip faster, easier, and smarter for all.")}
+                onMouseLeave={stopSpeaking}
               >
                 SmartCart revolutionizes grocery shopping with AI-powered, accessible, and seamless checkout solutions —
                 making every trip faster, easier, and smarter for all.
               </p>
-              <Button
-                className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 py-6 text-lg"
-                onMouseEnter={() => handleMouseEnter("Download SmartCart")}
-                onMouseLeave={handleMouseLeave}
-              >
-                Download
-              </Button>
-              <Link href="/checkout" className="inline-block mt-4">
-                <Button 
-                  variant="outline" 
-                  className="enlargeable border-[#5c5a7c] text-[#5c5a7c]"
-                  onMouseEnter={() => handleMouseEnter("Go to Checkout")}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  Go to Checkout
-                </Button>
-              </Link>
-
-              <Button
-      className="enlargeable bg-gradient-to-r from-yellow-400 to-red-500 text-white px-12 py-4 text-xl rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"
-      onMouseEnter={() => speak("Let's Play with Me!")}
-      onMouseLeave={stopSpeaking}
-      onClick={openPopup}
-      aria-label="Play with Me Button"
-    >
-      Play with Me!
-    </Button>
-
-
+              
+              <div className="space-y-4">
+                <Link href="/detect">
+                  <Button
+                    className="enlargeable w-full md:w-auto bg-white text-[#5c5a7c] hover:bg-white/90 px-8 py-6 text-lg flex items-center"
+                    onMouseEnter={() => speak("Start Scanning")}
+                    onMouseLeave={stopSpeaking}
+                  >
+                    <Camera className="mr-2 h-5 w-5" />
+                    Start Scanning
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                
+                <div className="flex space-x-4">
+                  <Button
+                    className="enlargeable flex-1 bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-6 py-4"
+                    onMouseEnter={() => speak("Download App")}
+                    onMouseLeave={stopSpeaking}
+                  >
+                    Download App
+                  </Button>
+                  
+                  <Button
+                    className="enlargeable flex-1 bg-gradient-to-r from-yellow-400 to-red-500 text-white px-6 py-4 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                    onMouseEnter={() => speak("Let's Play with Me!")}
+                    onMouseLeave={stopSpeaking}
+                    onClick={openPopup}
+                    aria-label="Play with Me Button"
+                  >
+                    Play with Me!
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="pt-6">
+                <h3 className="text-xl font-medium text-white/90 mb-3">How it works:</h3>
+                <div className="space-y-3">
+                  <div className="flex items-start">
+                    <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center shrink-0 mr-3">
+                      <Camera className="h-4 w-4 text-white" />
+                    </div>
+                    <p className="text-white/80">Scan items with your phone camera as you shop</p>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center shrink-0 mr-3">
+                      <ShoppingCart className="h-4 w-4 text-white" />
+                    </div>
+                    <p className="text-white/80">AI automatically identifies products and adds them to your cart</p>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center shrink-0 mr-3">
+                      <CreditCard className="h-4 w-4 text-white" />
+                    </div>
+                    <p className="text-white/80">Pay through the app and skip the checkout line entirely</p>
+                  </div>
+                </div>
+              </div>
             </div>
+            
             <div className="relative">
               <div className="relative mx-auto max-w-[300px]">
                 <div className="relative z-10 overflow-hidden rounded-[40px] border-[12px] border-black bg-black shadow-2xl ring-1 ring-gray-900/10">
@@ -380,7 +186,7 @@ const useTTS = () => {
                       <div className="h-2 w-2 rounded-full bg-gray-700"></div>
                     </div>
                   </div>
-                  <div className="aspect-[9/19] overflow-hidden bg-gradient-to-b from-gray-50 to-white phone-bg ">
+                  <div className="aspect-[9/19] overflow-hidden bg-gradient-to-b from-gray-50 to-white phone-bg">
                     <div className="p-4 flex flex-col h-full">
                       <div 
                         className="enlargeable bg-gradient-to-r from-[#c8c2f0] to-[#a599e9] rounded-lg p-3 mb-3 text-center text-white shadow-md transition-transform hover:scale-[1.02]"
@@ -391,8 +197,8 @@ const useTTS = () => {
                       </div>
                       <div 
                         className="enlargeable flex items-center mb-3 bg-white/80 backdrop-blur-sm rounded-lg p-2 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md hover:bg-white/90 cursor-pointer"
-                        onMouseEnter={() => handleMouseEnter("Banana Bundle - Large Detected")}
-                        onMouseLeave={handleMouseLeave}
+                        onMouseEnter={() => speak("Banana Bundle - Large Detected")}
+                        onMouseLeave={stopSpeaking}
                       >
                         <div className="flex-1 text-gray-800 font-medium">Banana Bundle - Large Detected</div>
                         <div className="h-6 w-6 bg-gradient-to-br from-[#e0f7e0] to-[#c8ecc8] rounded-full flex items-center justify-center shadow-sm transition-transform duration-300 hover:scale-110">
@@ -410,6 +216,9 @@ const useTTS = () => {
                           onMouseEnter={() => speak("Yellow bananas bundled together. Each banana is uniformly ripe with a bright yellow peel.")}
                           onMouseLeave={stopSpeaking}
                         />
+                        <div className="absolute bottom-2 right-2 bg-black/60 text-white px-3 py-1.5 rounded-full text-sm backdrop-blur-sm">
+                          scanning...
+                        </div>
                         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute inset-0 bg-black/75 flex items-center justify-center p-4 rounded-lg">
                           <p className="enlargeable text-white text-center text-sm">
                             Yellow bananas bundled together. Each banana is uniformly ripe with a bright yellow peel.
@@ -427,10 +236,9 @@ const useTTS = () => {
                 </div>
               </div>
             </div>
-
           </div>
         </div>     
       </section>
     </div>
-  );
+  )
 }
