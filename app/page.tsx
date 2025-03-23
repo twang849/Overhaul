@@ -181,7 +181,7 @@ const useTTS = () => {
               onMouseEnter={() => handleMouseEnter("Toggle Text-to-Speech")}
               onMouseLeave={handleMouseLeave}
             >
-              <span className="enlargeable text-sm text-white">Text-to-Speech</span>
+              <span className="enlargeable text-sm text-black">Text-to-Speech</span>
               <Switch
                 checked={isTTSEnabled}
                 onCheckedChange={() => setIsTTSEnabled(!isTTSEnabled)}
@@ -222,7 +222,7 @@ const useTTS = () => {
                 making every trip faster, easier, and smarter for all.
               </p>
               <Button
-                className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 py-6 text-lg"
+                className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 m-4 py-6 text-lg"
                 onMouseEnter={() => handleMouseEnter("Download SmartCart")}
                 onMouseLeave={handleMouseLeave}
               >
@@ -231,7 +231,7 @@ const useTTS = () => {
               <Link href="/checkout" className="inline-block mt-4">
                 <Button 
                   variant="outline" 
-                  className="enlargeable border-[#5c5a7c] text-[#5c5a7c]"
+                  className="enlargeable border-[#5c5a7c] text-[#5c5a7c] m-4"
                   onMouseEnter={() => handleMouseEnter("Go to Checkout")}
                   onMouseLeave={handleMouseLeave}
                 >
@@ -240,13 +240,13 @@ const useTTS = () => {
               </Link>
 
               <Button
-      className="enlargeable bg-gradient-to-r from-yellow-400 to-red-500 text-white px-12 py-4 text-xl rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"
-      onMouseEnter={() => speak("Let's Play with Me!")}
+      className="enlargeable bg-gradient-to-r from-white-400 to-purple-500 text-white px-12 py-4 text-xl rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"
+      onMouseEnter={() => speak("Play a Game!")}
       onMouseLeave={stopSpeaking}
       onClick={openPopup}
-      aria-label="Play with Me Button"
+      aria-label="Play a Game Button"
     >
-      Play with Me!
+      Play a Game!
     </Button>
 
 
