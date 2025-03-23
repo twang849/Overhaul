@@ -9,11 +9,11 @@
 :root.high-contrast {
     --background: #000000;
     --foreground: #ffffff;
-    --primary: #ffff00;
+    --primary: black;
     --secondary: #00ffff;
     --border: #ffffff;
     --input: #ffffff;
-    --ring: #ffff00;
+    --ring: black;
   }
   
   /* Override background in high contrast mode */
