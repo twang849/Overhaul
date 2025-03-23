@@ -14,4 +14,5 @@ Once downloaded, add files to app/ai folder
 
 # TO RUN: 
 python -m app.app
+
 npm run dev
