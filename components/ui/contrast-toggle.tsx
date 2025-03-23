@@ -35,11 +35,9 @@ export function ContrastToggle() {
       // size="lg"
       onClick={toggleContrast}  
       aria-label={highContrast ? "Disable high contrast" : "Enable high contrast"}
-      className="contrast-toggle-button flex items-center space-x-2 backdrop-blur-sm rounded-full px-4 py-8"
+      className="contrast-toggle-button flex items-center space-x-2 backdrop-blur-sm rounded-full px-2 py-2"
     >
       <div style={{fontSize: '16px'}}>
-        High Contrast
-        <br/>Mode
       </div>
       {highContrast ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
       <span className="sr-only">

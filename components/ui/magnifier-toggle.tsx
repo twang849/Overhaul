@@ -30,11 +30,10 @@ export function MagnifierToggle() {
     <Button
       // id="magnify"
       variant="outline"
-      size="lg"
+      size="sm"
       onClick={toggleMagnifier}
-      className="magnifier-toggle-button flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-8"
+      className="magnifier-toggle-button flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2"
     >
-      <div style={{fontSize: '16px'}}>Magnifying<br/>Glass</div>
       {magnifierActive ? <Search className="h-5 w-5" /> : <X className="h-5 w-5" />}
     </Button>
   )
