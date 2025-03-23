@@ -28,13 +28,12 @@ export function MagnifierToggle() {
 
   return (
     <Button
-      id="magnify"
+      // id="magnify"
       variant="outline"
-      size="lg"
+      size="sm"
       onClick={toggleMagnifier}
-      className="magnifier-toggle-button h-8 px-2 text-xs flex items-center gap-1 bg-yellow-400 border-yellow-500 hover:bg-yellow-500 text-black"
+      className="magnifier-toggle-button flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2"
     >
-      <div style={{fontSize: '16px'}}>Magnifying<br/>Glass</div>
       {magnifierActive ? <Search className="h-5 w-5" /> : <X className="h-5 w-5" />}
     </Button>
   )

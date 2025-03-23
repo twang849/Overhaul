@@ -170,6 +170,35 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              <Button
+                className="enlargeable bg-[#5c5a7c] hover:bg-[#4a4865] text-white px-8 m-4 py-6 text-lg"
+                onMouseEnter={() => handleMouseEnter("Download SmartCart")}
+                onMouseLeave={handleMouseLeave}
+              >
+                Download
+              </Button>
+              <Link href="/checkout" className="inline-block mt-4">
+                <Button 
+                  variant="outline" 
+                  className="enlargeable border-[#5c5a7c] text-[#5c5a7c] m-4"
+                  onMouseEnter={() => handleMouseEnter("Go to Checkout")}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  Go to Checkout
+                </Button>
+              </Link>
+
+              <Button
+      className="enlargeable bg-gradient-to-r from-white-400 to-purple-500 text-white px-12 py-4 text-xl rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"
+      onMouseEnter={() => speak("Play a Game!")}
+      onMouseLeave={stopSpeaking}
+      onClick={openPopup}
+      aria-label="Play a Game Button"
+    >
+      Play a Game!
+    </Button>
+
+
             </div>
             
             <div className="relative">

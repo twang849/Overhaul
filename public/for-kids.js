@@ -16,7 +16,7 @@ export default function Home() {
               onClick={openPopup} // Calls the openPopup function on click
               className="bg-orange-500 text-white px-6 py-4 rounded-lg font-semibold text-lg"
             >
-              Play with Me!
+              Play a Game!
             </button>
           </div>
         </div>

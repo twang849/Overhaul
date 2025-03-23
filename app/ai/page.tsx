@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react';
+import { Button } from "@/components/ui/button";
 
 const AiPage: React.FC = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -43,13 +44,42 @@ const AiPage: React.FC = () => {
     };
 
     return (
-        <div>
-            <h1>AI Page</h1>
-            <p>Welcome to the AI page!</p>
-            <video ref={videoRef} autoPlay playsInline style={{ width: '100%', maxWidth: '600px' }} />
-            <button onClick={toggleCamera} style={{ marginTop: '20px', padding: '10px 20px', fontSize: '16px' }}>
-                {isCameraOn ? 'Turn Camera Off' : 'Turn Camera On'}
-            </button>
+        <div className="min-h-screen bg-gradient-to-br from-[#c8c2f0] via-[#8a82c5] to-[#5c5a7c] py-16 px-4">
+            <div className="max-w-4xl mx-auto">
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl font-bold text-white mb-4 tracking-tight">Welcome to the SmartCart AI Experience 🛒🤖</h1>
+                    <p className="text-xl text-white/80">Using the power of AI ⚡, our system quickly scans your items 📦 and adds them to your checkout menu 🛍️, making the process fast 🚀, accessible, and totally hassle free and hands free. Experience a smooth, modern way to shop that's designed with you in mind 🧘.</p>
+                </div>
+                
+                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-xl">
+                    <div className="relative aspect-video mb-6 overflow-hidden rounded-xl bg-black/20">
+                        {!isCameraOn && (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <p className="text-white/60 text-lg">Camera is currently off</p>
+                            </div>
+                        )}
+                        <video 
+                            ref={videoRef} 
+                            autoPlay 
+                            playsInline 
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
+                    
+                    <div className="flex justify-center">
+                        <Button
+                            onClick={toggleCamera}
+                            className={`px-6 py-3 text-lg transition-all duration-300 ${
+                                isCameraOn 
+                                ? 'bg-red-500 hover:bg-red-600' 
+                                : 'bg-emerald-500 hover:bg-emerald-600'
+                            }`}
+                        >
+                            {isCameraOn ? 'Turn Camera Off' : 'Turn Camera On'}
+                        </Button>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
