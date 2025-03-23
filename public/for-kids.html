@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trivia Quiz</title>
+  <title>Healthy Trivia Quiz</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -40,7 +40,7 @@
   </style>
 </head>
 <body>
-  <h1>Trivia Quiz</h1>
+  <h1>Healthy Trivia Quiz</h1>
   <div class="question" id="question"></div>
   <div id="answers"></div>
   <div id="result" class="result"></div>
@@ -48,19 +48,24 @@
   <script>
     let questionIndex = 0;
     let correctAnswer = '';
-    let triviaQuestions = [];
 
-    // Fetch trivia questions from the API
-    fetch('https://opentdb.com/api.php?amount=10&category=9&difficulty=easy')
-      .then(response => response.json())
-      .then(data => {
-        triviaQuestions = data.results;
-        loadQuestion();
-      })
-      .catch(error => {
-        console.error('Error fetching trivia questions:', error);
-        document.getElementById('result').textContent = 'Failed to load questions.';
-      });
+    const triviaQuestions = [
+      { 
+        question: "Which food is the best source of Vitamin C?", 
+        correct_answer: "Oranges", 
+        incorrect_answers: ["Bread", "Chicken", "Rice"]
+      },
+      { 
+        question: "What should you drink the most to stay healthy?", 
+        correct_answer: "Water", 
+        incorrect_answers: ["Soda", "Juice", "Milk"]
+      },
+      { 
+        question: "What is the healthiest vegetable?", 
+        correct_answer: "Carrots", 
+        incorrect_answers: ["Chips", "Candy", "Cake"]
+      }
+    ];
 
     function loadQuestion() {
       if (questionIndex >= triviaQuestions.length) {
@@ -74,7 +79,6 @@
       const answersDiv = document.getElementById('answers');
       answersDiv.innerHTML = '';
 
-      // All options (correct + incorrect) combined
       const options = [...questionData.incorrect_answers, questionData.correct_answer];
       shuffle(options);
 
@@ -89,15 +93,19 @@
     }
 
     function checkAnswer(selected) {
-      const questionData = triviaQuestions[questionIndex];
-      if (selected === questionData.correct_answer) {
-        document.getElementById('result').textContent = 'Correct! Well done.';
-      } else {
-        document.getElementById('result').textContent = 'Oops! Try again.';
-      }
+      const explanations = {
+        "Oranges": "Great job! Oranges have Vitamin C, which helps keep you healthy!",
+        "Water": "Water is the best drink to keep your body hydrated and strong!",
+        "Carrots": "Carrots are full of Vitamin A, which helps your eyes stay healthy!"
+      };
 
-      questionIndex++;
-      setTimeout(loadQuestion, 1000); // Load next question after 1 second
+      if (selected === correctAnswer) {
+        document.getElementById('result').textContent = explanations[selected];
+        questionIndex++;
+        setTimeout(loadQuestion, 2000);
+      } else {
+        document.getElementById('result').textContent = 'Oops! Try again. You can do it!';
+      }
     }
 
     function restartGame() {
@@ -106,13 +114,14 @@
       loadQuestion();
     }
 
-    // Shuffle array function to randomize the answer options
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
       }
     }
+
+    loadQuestion();
   </script>
 </body>
 </html>
