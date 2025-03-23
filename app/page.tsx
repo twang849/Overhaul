@@ -271,7 +271,7 @@ const useTTS = () => {
                   onMouseLeave={handleMouseLeave}
                 >
                   <Settings className="h-5 w-5 mr-2" />
-                  <span className="text-white">Accessibility Options</span>
+                  <span className="font-bold text-white">Accessibility Options</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-60">
