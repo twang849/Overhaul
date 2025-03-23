@@ -95,7 +95,7 @@ export default function MissionPage() {
             </motion.p>
           </motion.div>
 
-          {/* Main Mission Statement with glow effect */}
+          {/* Main Mission Statement */}
           <motion.div 
             className="bg-white/90 backdrop-blur-md rounded-2xl shadow-xl p-8 mb-12 relative overflow-hidden group"
             variants={fadeInUp}
@@ -114,13 +114,15 @@ export default function MissionPage() {
               Revolutionizing Retail
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
-              At SmartCart, we're on a mission to transform the grocery shopping experience.
-              By harnessing the power of cutting-edge AI technology, we're eliminating long
-              lines and creating a seamless, delightful shopping journey for everyone.
+              At SmartCart, we're on a mission to fundamentally transform the grocery shopping experience for millions of people worldwide.
+              By harnessing the power of cutting-edge AI and computer vision technology, we're not just eliminating long checkout lines –
+              we're reimagining the entire shopping journey. Our innovative system learns and adapts to each shopper's preferences,
+              making shopping more intuitive, efficient, and enjoyable than ever before. We believe that technology should serve humanity,
+              making everyday tasks not just easier, but truly delightful.
             </p>
           </motion.div>
 
-          {/* Key Pillars Grid with hover effects */}
+          {/* Key Pillars Grid */}
           <motion.div 
             className="grid md:grid-cols-2 gap-8 mb-12"
             variants={stagger}
@@ -129,12 +131,12 @@ export default function MissionPage() {
               {
                 icon: "⚡",
                 title: "Speed & Efficiency",
-                description: "Say goodbye to long checkout lines. Our AI-powered system instantly recognizes your items, making shopping faster and more efficient than ever before."
+                description: "Say goodbye to long checkout lines and frustrating shopping experiences. Our AI-powered system instantly recognizes your items as you shop, making the entire process seamless and efficient. SmartCart's advanced algorithms work in real-time to track your selections, provide personalized recommendations, and handle payment processing automatically. This revolutionary approach saves our customers an average of 15 minutes per shopping trip, adding up to hours of saved time each month."
               },
               {
                 icon: "🌈",
                 title: "Inclusivity",
-                description: "We believe shopping should be accessible to everyone. From busy parents to seniors and individuals with disabilities, SmartCart empowers all shoppers."
+                description: "We believe shopping should be accessible to everyone, regardless of their physical abilities or technological expertise. From busy parents juggling children to seniors seeking independence, and individuals with disabilities requiring additional support – SmartCart empowers all shoppers. Our system features voice commands, adjustable height displays, and intuitive interfaces that adapt to each user's needs. We've partnered with accessibility experts and diverse community groups to ensure our solution truly serves everyone."
               }
             ].map((pillar, index) => (
               <motion.div 
@@ -175,15 +177,27 @@ export default function MissionPage() {
             ))}
           </motion.div>
 
-          {/* Values Section with staggered animation */}
+          {/* Values Section */}
           <motion.div 
             className="grid md:grid-cols-3 gap-8"
             variants={stagger}
           >
             {[
-              { icon: "✨", title: "Innovation", description: "Pushing boundaries with cutting-edge AI technology" },
-              { icon: "💪", title: "Empowerment", description: "Making shopping accessible and enjoyable for everyone" },
-              { icon: "🤝", title: "Community", description: "Building a more inclusive shopping experience together" }
+              { 
+                icon: "✨", 
+                title: "Innovation", 
+                description: "We're constantly pushing the boundaries of what's possible in retail technology. Our AI systems are continuously learning and evolving, incorporating the latest advances in computer vision, machine learning, and user experience design. We invest heavily in R&D to stay ahead of the curve and bring revolutionary solutions to market."
+              },
+              { 
+                icon: "💪", 
+                title: "Empowerment", 
+                description: "We believe in giving people back their time and independence. Our technology empowers shoppers to take control of their shopping experience, making informed decisions with real-time product information, dietary filters, and budget tracking. We're creating tools that adapt to each person's unique needs and preferences."
+              },
+              { 
+                icon: "🤝", 
+                title: "Community", 
+                description: "Building a more inclusive shopping experience isn't just our goal – it's our responsibility to the community. We actively collaborate with local businesses, disability advocacy groups, and consumer organizations to ensure our solution serves everyone. Together, we're creating a future where shopping is truly accessible to all."
+              }
             ].map((value, index) => (
               <motion.div 
                 key={index}
